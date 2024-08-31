@@ -1,0 +1,4 @@
+res://Prefabs/Board.tscn
+res://Assets/Scripts/BoardManager.gd
+res://Assets/Scripts/Scripter.gd
+res://Assets/Scripts/DisplayInfoManager.gd

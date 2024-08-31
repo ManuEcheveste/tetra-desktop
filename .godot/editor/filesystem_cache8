@@ -1,0 +1,37 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1725089348
+export_presets.cfg::TextFile::-1::1725088865::0::1::::<><>::
+icon.svg::CompressedTexture2D::1875632096193073955::1724644546::1724898683::1::::<><>::
+::res://Assets/::1724898683
+GemygemSkin.png::CompressedTexture2D::6405085189531977103::1724576212::1724898683::1::::<><>::
+::res://Assets/Fonts/::1724898683
+Prom.ttf::FontFile::7368214461732993805::1724608582::1724898683::1::::<><>::
+::res://Assets/Scenes/::1724909510
+MainGame.tscn::PackedScene::1396590759284005488::1724909510::0::1::::<><>::uid://cdmuarr6mdqy2::::res://Prefabs/Board.tscn
+::res://Assets/Scripts/::1725089306
+BoardManager.gd::GDScript::-1::1725088617::0::1::::<>TileMapLayer<>::
+HoldManager.gd::GDScript::-1::1724990183::0::1::::<>TileMapLayer<>::
+QueueManager.gd::GDScript::-1::1724993942::0::1::::<>TileMapLayer<>::
+DisplayInfoManager.gd::GDScript::-1::1725088602::0::1::::<>Control<>::
+Scripter.gd::GDScript::-1::1725088617::0::1::::<>Node<>::
+::res://Assets/Sprites/::1724987543
+Board.svg::CompressedTexture2D::8831840431374862656::1724628648::1724898683::1::::<><>::
+HOLD.png::CompressedTexture2D::9070295155967239211::1724612778::1724898683::1::::<><>::
+QUEUE.png::CompressedTexture2D::6950866803624588904::1724612782::1724898683::1::::<><>::
+S Q U A R E.png::CompressedTexture2D::8572551359801142341::1724581366::1724898683::1::::<><>::
+Screenshot 2024-08-29 211210.png::CompressedTexture2D::49021908305799889::1724987543::1724987543::1::::<><>::
+::res://Exports/::1725089503
+Tetra Desktop.apple-touch-icon.png::CompressedTexture2D::585593979939874000::1725089348::1725090032::1::::<><>::
+Tetra Desktop.icon.png::CompressedTexture2D::7175589207183021704::1725089348::1725090032::1::::<><>::
+Tetra Desktop.png::CompressedTexture2D::1633311243355911536::1725089348::1725090032::1::::<><>::
+::res://Prefabs/::1725089239
+Board.tscn::PackedScene::5009395691787644803::1725089239::0::1::::<><>::uid://dueuwyx80a3sb::::res://Assets/Sprites/S Q U A R E.png<>res://Assets/Scripts/BoardManager.gd<>uid://cxiw211iuay8n::::res://Assets/GemygemSkin.png<>res://Assets/Scripts/HoldManager.gd<>res://Assets/Scripts/QueueManager.gd<>uid://d2hyo3b2mesr8::::res://Assets/Sprites/HOLD.png<>uid://c6bb04nnk8br1::::res://Assets/Sprites/QUEUE.png<>uid://x0nbrw3mfmf::::res://Assets/Sprites/Screenshot 2024-08-29 211210.png<>res://Assets/Scripts/DisplayInfoManager.gd
+I.tscn::PackedScene::3092325643570040701::1724616342::0::1::::<><>::uid://cxiw211iuay8n::::res://Assets/GemygemSkin.png<>res://Assets/Scripts/BoardController.cs
+J.tscn::PackedScene::8359215832135934491::1724616308::0::1::::<><>::uid://cxiw211iuay8n::::res://Assets/GemygemSkin.png<>res://Assets/Scripts/BoardController.cs
+L.tscn::PackedScene::5795662949353008322::1724616286::0::1::::<><>::uid://cxiw211iuay8n::::res://Assets/GemygemSkin.png<>res://Assets/Scripts/BoardController.cs
+O.tscn::PackedScene::630021397645547183::1724656846::0::1::::<><>::uid://cxiw211iuay8n::::res://Assets/GemygemSkin.png<>res://Assets/Scripts/BoardController.cs
+S.tscn::PackedScene::6819872512252592064::1724616254::0::1::::<><>::uid://cxiw211iuay8n::::res://Assets/GemygemSkin.png<>res://Assets/Scripts/BoardController.cs
+T.tscn::PackedScene::1384784505266182786::1724616316::0::1::::<><>::uid://cxiw211iuay8n::::res://Assets/GemygemSkin.png<>res://Assets/Scripts/BoardController.cs
+Z.tscn::PackedScene::8903577858814964618::1724616260::0::1::::<><>::uid://cxiw211iuay8n::::res://Assets/GemygemSkin.png<>res://Assets/Scripts/BoardController.cs
+::res://tetra-desktop/::1725087845
+README.md::TextFile::-1::1725087845::0::1::::<><>::

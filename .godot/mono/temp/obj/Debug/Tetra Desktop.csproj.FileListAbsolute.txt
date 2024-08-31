@@ -1,0 +1,17 @@
+D:\ManuEcheveste\Projects\Tetra Desktop\.godot\mono\temp\bin\Debug\Tetra Desktop.deps.json
+D:\ManuEcheveste\Projects\Tetra Desktop\.godot\mono\temp\bin\Debug\Tetra Desktop.runtimeconfig.json
+D:\ManuEcheveste\Projects\Tetra Desktop\.godot\mono\temp\bin\Debug\Tetra Desktop.dll
+D:\ManuEcheveste\Projects\Tetra Desktop\.godot\mono\temp\bin\Debug\Tetra Desktop.pdb
+D:\ManuEcheveste\Projects\Tetra Desktop\.godot\mono\temp\bin\Debug\GodotSharp.dll
+D:\ManuEcheveste\Projects\Tetra Desktop\.godot\mono\temp\bin\Debug\GodotSharpEditor.dll
+D:\ManuEcheveste\Projects\Tetra Desktop\.godot\mono\temp\obj\Debug\Tetra Desktop.csproj.AssemblyReference.cache
+D:\ManuEcheveste\Projects\Tetra Desktop\.godot\mono\temp\obj\Debug\Tetra Desktop.GeneratedMSBuildEditorConfig.editorconfig
+D:\ManuEcheveste\Projects\Tetra Desktop\.godot\mono\temp\obj\Debug\Tetra Desktop.AssemblyInfoInputs.cache
+D:\ManuEcheveste\Projects\Tetra Desktop\.godot\mono\temp\obj\Debug\Tetra Desktop.AssemblyInfo.cs
+D:\ManuEcheveste\Projects\Tetra Desktop\.godot\mono\temp\obj\Debug\Tetra Desktop.csproj.CoreCompileInputs.cache
+D:\ManuEcheveste\Projects\Tetra Desktop\.godot\mono\temp\obj\Debug\Tetra Desktop.csproj.CopyComplete
+D:\ManuEcheveste\Projects\Tetra Desktop\.godot\mono\temp\obj\Debug\Tetra Desktop.dll
+D:\ManuEcheveste\Projects\Tetra Desktop\.godot\mono\temp\obj\Debug\refint\Tetra Desktop.dll
+D:\ManuEcheveste\Projects\Tetra Desktop\.godot\mono\temp\obj\Debug\Tetra Desktop.pdb
+D:\ManuEcheveste\Projects\Tetra Desktop\.godot\mono\temp\obj\Debug\Tetra Desktop.genruntimeconfig.cache
+D:\ManuEcheveste\Projects\Tetra Desktop\.godot\mono\temp\obj\Debug\ref\Tetra Desktop.dll

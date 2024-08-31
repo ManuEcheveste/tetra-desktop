@@ -1,0 +1,209 @@
+[gd_scene load_steps=16 format=4 uid="uid://cdmuarr6mdqy2"]
+
+[ext_resource type="Texture2D" uid="uid://dueuwyx80a3sb" path="res://Assets/Sprites/S Q U A R E.png" id="1_1e4bj"]
+[ext_resource type="Script" path="res://Assets/Scripts/BoardManager.gd" id="1_440yr"]
+[ext_resource type="Texture2D" uid="uid://cxiw211iuay8n" path="res://Assets/GemygemSkin.png" id="1_jcnxv"]
+[ext_resource type="Texture2D" uid="uid://d2hyo3b2mesr8" path="res://Assets/Sprites/HOLD.png" id="5_uy4f5"]
+[ext_resource type="Texture2D" uid="uid://c6bb04nnk8br1" path="res://Assets/Sprites/QUEUE.png" id="6_6psay"]
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_eoxxb"]
+tile_data = PackedInt32Array(0, 131072, 0, 65536, 131072, 0, 1, 131072, 0, 65537, 131072, 0)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_06mne"]
+tile_data = PackedInt32Array(0, 0, 0, 1, 0, 0, 65537, 0, 0, 65538, 0, 0)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_4r1ak"]
+tile_data = PackedInt32Array(65536, 196608, 0, 1, 196608, 0, 65537, 196608, 0, 2, 196608, 0)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_ew6xy"]
+tile_data = PackedInt32Array(65536, 65536, 0, 65537, 65536, 0, 2, 65536, 0, 65538, 65536, 0)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_1aqey"]
+tile_data = PackedInt32Array(0, 327680, 0, 65536, 327680, 0, 65537, 327680, 0, 65538, 327680, 0)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_hjpoa"]
+tile_data = PackedInt32Array(0, 262144, 0, 1, 262144, 0, 2, 262144, 0, 3, 262144, 0)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_0ak8g"]
+tile_data = PackedInt32Array(65536, 393216, 0, 1, 393216, 0, 65537, 393216, 0, 65538, 393216, 0)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xldvy"]
+resource_name = "Default Minos"
+texture = ExtResource("1_jcnxv")
+separation = Vector2i(1, 0)
+texture_region_size = Vector2i(30, 30)
+use_texture_padding = false
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+10:0/0 = 0
+11:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_3lrim"]
+tile_size = Vector2i(30, 30)
+sources/0 = SubResource("TileSetAtlasSource_xldvy")
+pattern_0 = SubResource("TileMapPattern_eoxxb")
+pattern_1 = SubResource("TileMapPattern_06mne")
+pattern_2 = SubResource("TileMapPattern_4r1ak")
+pattern_3 = SubResource("TileMapPattern_ew6xy")
+pattern_4 = SubResource("TileMapPattern_1aqey")
+pattern_5 = SubResource("TileMapPattern_hjpoa")
+pattern_6 = SubResource("TileMapPattern_0ak8g")
+
+[sub_resource type="Theme" id="Theme_86ur8"]
+Label/font_sizes/font_size = 40
+
+[node name="Board" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -168.0
+offset_top = -317.0
+offset_right = 132.0
+offset_bottom = 283.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Margin" type="Node2D" parent="."]
+position = Vector2(150, 300)
+scale = Vector2(10.2667, 20.2667)
+
+[node name="MarginL" type="Sprite2D" parent="Margin"]
+position = Vector2(-14.8052, 1.63913e-06)
+scale = Vector2(0.012987, 0.986842)
+texture = ExtResource("1_1e4bj")
+
+[node name="MarginR" type="Sprite2D" parent="Margin"]
+position = Vector2(14.8052, 1.63913e-06)
+scale = Vector2(0.012987, 0.986842)
+texture = ExtResource("1_1e4bj")
+
+[node name="MarginB" type="Sprite2D" parent="Margin"]
+position = Vector2(0, 14.9013)
+scale = Vector2(1, 0.00657901)
+texture = ExtResource("1_1e4bj")
+
+[node name="GridBGN" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.392157)
+position = Vector2(150, 300)
+scale = Vector2(10, 20)
+texture = ExtResource("1_1e4bj")
+
+[node name="MainGrid" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAADAP7/AAALAAAAAAAEAP7/AAALAAAAAAAEAP3/AAALAAAAAAAFAP3/AAALAAAAAAAFAP7/AAALAAAAAAADAP3/AAALAAAAAAAGAP7/AAALAAAAAAAAAAIAAAAJAAAAAAAAAAMAAAAJAAAAAAAAAAQAAAAJAAAAAAAAAAUAAAAJAAAAAAAAAAYAAAAJAAAAAAAAAAcAAAAJAAAAAAAAAAgAAAAJAAAAAAAAAAoAAAAJAAAAAAAAAAsAAAAJAAAAAAAAAAwAAAAJAAAAAAAAAA0AAAAJAAAAAAAAAA4AAAAJAAAAAAAAAA8AAAAJAAAAAAAAABAAAAAJAAAAAAAAABEAAAAJAAAAAAAAABIAAAAJAAAAAAAAABMAAAAJAAAAAAABAAIAAAAJAAAAAAABAAMAAAAJAAAAAAABAAQAAAAJAAAAAAABAAUAAAAJAAAAAAABAAYAAAAJAAAAAAABAAcAAAAJAAAAAAABAAkAAAAJAAAAAAABAAoAAAAJAAAAAAABAAsAAAAJAAAAAAABAAwAAAAJAAAAAAABAA0AAAAJAAAAAAABAA4AAAAJAAAAAAABABAAAAAJAAAAAAABABEAAAAJAAAAAAABABIAAAAJAAAAAAABABMAAAAJAAAAAAACAAIAAAAJAAAAAAACAAMAAAAJAAAAAAACAAQAAAAJAAAAAAACAAUAAAAJAAAAAAACAAYAAAAJAAAAAAACAAcAAAAJAAAAAAACAAgAAAAJAAAAAAACAAkAAAAJAAAAAAACAAoAAAAJAAAAAAACAAwAAAAJAAAAAAACAA0AAAAJAAAAAAACAA4AAAAJAAAAAAACABAAAAAJAAAAAAACABEAAAAJAAAAAAACABIAAAAJAAAAAAACABMAAAAJAAAAAAADAAIAAAAJAAAAAAADAAMAAAAJAAAAAAADAAQAAAAJAAAAAAADAAUAAAAJAAAAAAADAAYAAAAJAAAAAAADAAgAAAAJAAAAAAADAAkAAAAJAAAAAAADAAoAAAAJAAAAAAADAAsAAAAJAAAAAAADAAwAAAAJAAAAAAADAA0AAAAJAAAAAAADAA4AAAAJAAAAAAADAA8AAAAJAAAAAAADABIAAAAJAAAAAAADABMAAAAJAAAAAAAEAAIAAAAJAAAAAAAEAAQAAAAJAAAAAAAEAAUAAAAJAAAAAAAEAAYAAAAJAAAAAAAEAAcAAAAJAAAAAAAEAAgAAAAJAAAAAAAEAAkAAAAJAAAAAAAEAAoAAAAJAAAAAAAEAAsAAAAJAAAAAAAEAAwAAAAJAAAAAAAEAA0AAAAJAAAAAAAEAA4AAAAJAAAAAAAEAA8AAAAJAAAAAAAEABAAAAAJAAAAAAAEABEAAAAJAAAAAAAEABMAAAAJAAAAAAAFAAIAAAAJAAAAAAAFAAMAAAAJAAAAAAAFAAQAAAAJAAAAAAAFAAYAAAAJAAAAAAAFAAcAAAAJAAAAAAAFAAgAAAAJAAAAAAAFAAkAAAAJAAAAAAAFAAsAAAAJAAAAAAAFAAwAAAAJAAAAAAAFAA0AAAAJAAAAAAAFAA8AAAAJAAAAAAAFABAAAAAJAAAAAAAFABEAAAAJAAAAAAAFABIAAAAJAAAAAAAFABMAAAAJAAAAAAAGAAIAAAAJAAAAAAAGAAMAAAAJAAAAAAAGAAUAAAAJAAAAAAAGAAYAAAAJAAAAAAAGAAcAAAAJAAAAAAAGAAgAAAAJAAAAAAAGAAkAAAAJAAAAAAAGAAoAAAAJAAAAAAAGAAsAAAAJAAAAAAAGAAwAAAAJAAAAAAAGAA0AAAAJAAAAAAAGAA4AAAAJAAAAAAAGAA8AAAAJAAAAAAAGABAAAAAJAAAAAAAGABEAAAAJAAAAAAAGABIAAAAJAAAAAAAGABMAAAAJAAAAAAAHAAMAAAAJAAAAAAAHAAQAAAAJAAAAAAAHAAUAAAAJAAAAAAAHAAYAAAAJAAAAAAAHAAcAAAAJAAAAAAAHAAgAAAAJAAAAAAAHAAkAAAAJAAAAAAAHAAoAAAAJAAAAAAAHAAsAAAAJAAAAAAAHAAwAAAAJAAAAAAAHAA0AAAAJAAAAAAAHAA4AAAAJAAAAAAAHAA8AAAAJAAAAAAAHABAAAAAJAAAAAAAHABEAAAAJAAAAAAAHABIAAAAJAAAAAAAHABMAAAAJAAAAAAAIAAMAAAAJAAAAAAAIAAQAAAAJAAAAAAAIAAUAAAAJAAAAAAAIAAgAAAAJAAAAAAAIAAkAAAAJAAAAAAAIAAoAAAAJAAAAAAAIAAsAAAAJAAAAAAAIAA0AAAAJAAAAAAAIAA4AAAAJAAAAAAAIAA8AAAAJAAAAAAAIABAAAAAJAAAAAAAIABEAAAAJAAAAAAAIABIAAAAJAAAAAAAJAAIAAAAJAAAAAAAJAAMAAAAJAAAAAAAJAAQAAAAJAAAAAAAJAAUAAAAJAAAAAAAJAAYAAAAJAAAAAAAJAAcAAAAJAAAAAAAJAAgAAAAJAAAAAAAJAAkAAAAJAAAAAAAJAAoAAAAJAAAAAAAJAAsAAAAJAAAAAAAJAAwAAAAJAAAAAAAJAA4AAAAJAAAAAAAJAA8AAAAJAAAAAAAJABAAAAAJAAAAAAAJABEAAAAJAAAAAAAJABIAAAAJAAAAAAAJABMAAAAJAAAAAAAIAAIAAAAJAAAAAAAIAAcAAAAJAAAAAAACAA8AAAAJAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAABAP//AAAAAAAAAAABAAEAAAAFAAAAAAACAAEAAAAFAAAAAAACAAAAAAAFAAAAAAACAP//AAAFAAAAAAAAAP//AAABAAAAAAAAAP7/AAABAAAAAAABAP7/AAABAAAAAAACAP7/AAABAAAAAAA=")
+tile_set = SubResource("TileSet_3lrim")
+navigation_enabled = false
+script = ExtResource("1_440yr")
+
+[node name="Active Grid" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_3lrim")
+navigation_enabled = false
+
+[node name="HoldGrid" type="TileMapLayer" parent="."]
+position = Vector2(-140, 53)
+tile_map_data = PackedByteArray("AAABAAAAAAAIAAAAAAACAAAAAAAIAAAAAAAAAAAAAAAIAAAAAAADAAAAAAAIAAAAAAA=")
+tile_set = SubResource("TileSet_3lrim")
+navigation_enabled = false
+
+[node name="NextQueueGrid" type="TileMapLayer" parent="."]
+position = Vector2(320, 53)
+tile_map_data = PackedByteArray("AAAAAAAAAAAEAAAAAAABAAAAAAAEAAAAAAACAAAAAAAEAAAAAAADAAAAAAAEAAAAAAABAAIAAAACAAAAAAACAAIAAAACAAAAAAACAAMAAAACAAAAAAABAAMAAAACAAAAAAADAAUAAAADAAAAAAACAAUAAAADAAAAAAACAAYAAAADAAAAAAABAAYAAAADAAAAAAABAAgAAAAFAAAAAAABAAkAAAAFAAAAAAACAAkAAAAFAAAAAAADAAkAAAAFAAAAAAACAAwAAAAGAAAAAAABAAwAAAAGAAAAAAACAAsAAAAGAAAAAAADAAwAAAAGAAAAAAA=")
+tile_set = SubResource("TileSet_3lrim")
+navigation_enabled = false
+
+[node name="Pieces Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = -60.0
+offset_top = 467.0
+offset_right = -8.0
+offset_bottom = 490.0
+text = "PIECES"
+
+[node name="Total Pieces" type="Label" parent="Pieces Label"]
+layout_mode = 2
+offset_left = -94.0
+offset_top = 12.0
+offset_right = 9.0
+offset_bottom = 67.0
+theme = SubResource("Theme_86ur8")
+text = "0,"
+horizontal_alignment = 2
+autowrap_mode = 2
+
+[node name="PPS" type="Label" parent="Pieces Label"]
+layout_mode = 2
+offset_left = 8.0
+offset_top = 35.0
+offset_right = 54.0
+offset_bottom = 58.0
+text = "0.00/s"
+vertical_alignment = 2
+
+[node name="Pieces Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = -68.0
+offset_top = 541.0
+offset_right = -8.0
+offset_bottom = 564.0
+text = "ATTACK"
+
+[node name="Total Pieces" type="Label" parent="Pieces Label2"]
+layout_mode = 2
+offset_left = -94.0
+offset_top = 12.0
+offset_right = 9.0
+offset_bottom = 67.0
+theme = SubResource("Theme_86ur8")
+text = "0,"
+horizontal_alignment = 2
+autowrap_mode = 2
+
+[node name="PPS" type="Label" parent="Pieces Label2"]
+layout_mode = 2
+offset_left = 8.0
+offset_top = 35.0
+offset_right = 54.0
+offset_bottom = 58.0
+text = "0.00/m"
+vertical_alignment = 2
+
+[node name="VS Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 307.0
+offset_top = 481.0
+offset_right = 357.0
+offset_bottom = 504.0
+text = "VS SCORE"
+
+[node name="Total Pieces" type="Label" parent="VS Label"]
+offset_left = -1.0
+offset_top = 9.0
+offset_right = 102.0
+offset_bottom = 64.0
+theme = SubResource("Theme_86ur8")
+text = "0.00"
+autowrap_mode = 2
+
+[node name="Hold" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(-79.2172, 60.5)
+scale = Vector2(0.333546, 0.33518)
+texture = ExtResource("5_uy4f5")
+
+[node name="Queue" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(379, 239)
+scale = Vector2(0.332632, 0.331931)
+texture = ExtResource("6_6psay")
