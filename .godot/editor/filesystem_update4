@@ -1,4 +1,6 @@
-res://Prefabs/Board.tscn
 res://Assets/Scripts/BoardManager.gd
-res://Assets/Scripts/Scripter.gd
+res://Prefabs/AudioPlayer.tscn
+res://Prefabs/Board.tscn
+res://Assets/Scripts/AudioPlayer.gd
+res://Prefabs/T.tscn
 res://Assets/Scripts/DisplayInfoManager.gd

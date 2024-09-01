@@ -1,15 +1,34 @@
 extends TileMapLayer
 
 var isPlayerOne:bool
+var isDebug = false
 @onready var activeGrid = $ActiveGrid
 @onready var ghostGrid = $GhostGrid
 @onready var dangerGrid = $DangerGrid
 @onready var holdManager = $HoldGrid
 @onready var queueManager = $QueueDisplayManager
 
+#region Audio
+var audioPlayer= preload("res://Prefabs/AudioPlayer.tscn")
+var sfxRotate = preload("res://Assets/Audio/SFX/Rotate.wav")
+var sfxMove = preload("res://Assets/Audio/SFX/Move.wav")
+var sfxSoftDrop = preload("res://Assets/Audio/SFX/SoftDrop.wav")
+var sfxHardDrop = preload("res://Assets/Audio/SFX/HardDrop.wav")
+var sfxLockPiece = preload("res://Assets/Audio/SFX/LockPiece.wav")
+var sfxHold = preload("res://Assets/Audio/SFX/Hold.wav")
 
-@warning_ignore("unused_signal")
+var sfxPC = preload("res://Assets/Audio/SFX/PerfectClear.wav")
+var sfxClearLine = preload("res://Assets/Audio/SFX/LineClear.wav")
+var sfxClearTetra = preload("res://Assets/Audio/SFX/TetraClear.wav")
+
+var sfxSpin = preload("res://Assets/Audio/SFX/Spin.wav")
+var sfxClearSpin = preload("res://Assets/Audio/SFX/ClearSpin.wav")
+var sfxClearB2B = preload("res://Assets/Audio/SFX/ClearB2B.wav")
+#endregion
+
+
 signal LockedPiece
+signal Attack(lines: int)
 
 #tetrominoes
 var I_0 := [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1)]
@@ -95,6 +114,17 @@ var kickTableI := {
 var bag := [I, J, L, O, T, S, Z]
 var currentBag := bag.duplicate()
 
+#Attack/combos
+var inCombo: bool = false
+var combo: int = 0
+var inB2B: bool = false
+var b2b: int = 0
+
+#T-Spin related Calcs
+var lastActRotation: bool = false
+var tSpinType: int = 0
+
+
 #Current Piece, AKA Active piece
 var currentPiece: String
 var currentPieceTiles = N[0]
@@ -131,6 +161,8 @@ var currentARR = 0
 var maxDAS = Scripter.P1_DAS #Cuanto tarda en iniciar a mover la pieza sola
 var currentDAS = 0
 var SDF = Scripter.P1_SDF
+
+
 
 func _ready():
 	await get_tree().create_timer(0.2).timeout #Necesario para que no explote la QUEUE (aun no se adignan las tiles de I y O)
@@ -219,6 +251,8 @@ func ApplyGravity():
 	if canMoveDown:
 		isLockTimerActive = false
 		currentPieceCoords.y += 1
+		if(isSoftDroping):
+			PlayAudio(sfxSoftDrop)
 	else:
 		isLockTimerActive = true
 	DrawPiece(0, currentPieceTiles, currentPieceCoords)
@@ -399,7 +433,9 @@ func MovePiece(dir):
 				break
 	
 	if not collision:
+		PlayAudio(sfxMove)
 		currentPieceCoords = tmpPos
+		lastActRotation = false
 	DrawPiece(0, currentPieceTiles, currentPieceCoords)
 	DrawGhost()
 	if isLockTimerActive:
@@ -507,6 +543,11 @@ func RotatePiece(dir):
 			#print("Rotating with ", kickTableAttempts, " attempts.")
 			currentPieceTiles = tmpPieceTiles
 			currentPieceRotation = tmpRotation
+			lastActRotation = true
+			if IsTSpin() > 0 and currentPiece == "T":
+				PlayAudio(sfxSpin)
+			else:
+				PlayAudio(sfxRotate)
 			break
 		else:
 			kickTableAttempts += 1
@@ -524,17 +565,18 @@ func HardDrop():
 	ClearActivePiece()
 	var maxDropDistance = 0
 	while true:
-		var can_move_down = true
+		var canMoveDown = true
 		for block in currentPieceTiles:
 			var new_pos = currentPieceCoords + block + Vector2i(0, maxDropDistance + 1)
 			if new_pos.y >= boardHeight or not IsCellEmpty(new_pos):
-				can_move_down = false
+				canMoveDown = false
 				break
-		if not can_move_down:
+		if not canMoveDown:
 			break
 		maxDropDistance += 1
 	currentPieceCoords.y += maxDropDistance
-	LockPiece()
+	PlayAudio(sfxHardDrop)
+	LockPiece(true)
 
 func InstaSoftDrop():
 	ClearActivePiece()
@@ -556,7 +598,7 @@ func InstaSoftDrop():
 #endregion
 
 #region GameLogic
-func LockPiece():
+func LockPiece(suppressLockSound = false):
 	isLockTimerActive = false
 	currentLockTimer = 0
 	currentLockRotation = 0
@@ -564,9 +606,128 @@ func LockPiece():
 	DrawPiece(1, currentPieceTiles, currentPieceCoords)	
 	ghostGrid.clear()
 	dangerGrid.clear()
-	ScanFullLines()
+		
+	var linesCleared = ScanFullLines()
+	
+	if get_used_cells().is_empty():
+		AttackCalculator(linesCleared, true)
+	else:
+		AttackCalculator(linesCleared)
 	SpawnNewPiece()
-	emit_signal("LockedPiece")
+	if not suppressLockSound:
+		PlayAudio(sfxLockPiece)
+	LockedPiece.emit()
+
+func IsTSpin() -> int:
+	if not lastActRotation or currentPiece != "T":
+		tSpinType = 0
+		return 0
+	else:
+		var corners = [
+			Vector2i(0,0),
+			Vector2i(0,2),
+			Vector2i(2,0),
+			Vector2i(2,2)
+			]
+			
+		var filledCorners = 0
+		
+		for corner in corners:
+			var checkPos = currentPieceCoords + corner
+			if not IsCellEmpty(checkPos):
+				if isDebug:
+					set_cell(checkPos, 0, Vector2i(11,0))
+				filledCorners += 1
+				
+		if filledCorners >= 1:
+			if IsFacingTwoCorners(corners):
+				tSpinType = 2
+				return tSpinType
+			else:
+				tSpinType = 1
+				return tSpinType
+		else:
+			tSpinType = 0
+			return 0
+		
+func IsFacingTwoCorners(corners) -> bool: #Used for T-Spin calculations
+	var facingCorners = 0
+	for i in range(4):
+		var checkPos = currentPieceCoords + corners[i]
+		if not IsCellEmpty(checkPos):
+			if i == 1 or i == 3: # Asumiendo que los índices 1 y 3 son los laterales de la pieza "T"
+				facingCorners += 1
+	return facingCorners >= 2
+
+func AttackCalculator(linesCleared: int, perfectCleared: bool = false):
+	var attack: int = 0
+	
+	#print(tSpinType)
+	if not inCombo and linesCleared > 0:
+		inCombo = true
+	
+	if perfectCleared == true:
+		attack += 10
+		PlayAudio(sfxPC)
+	
+	match linesCleared:
+		0:
+			inCombo = false
+			combo = 0
+		1:
+			if tSpinType > 0:
+				PlayAudio(sfxClearSpin)
+				if not inB2B:
+					inB2B = true
+				else:
+					attack += 1
+					b2b += 1
+				if tSpinType == 2:
+					attack += 2
+			else:
+				inB2B = false
+				b2b = 0
+				PlayAudio(sfxClearLine)
+		2:
+			attack += 1
+			if tSpinType > 0:
+				PlayAudio(sfxClearSpin)
+				if not inB2B:
+					inB2B = true
+				else:
+					attack += 1
+					b2b += 1
+				if tSpinType == 2:
+					attack += 3
+			else:
+				inB2B = false
+				b2b = 0
+				PlayAudio(sfxClearLine)
+		3:
+			attack += 2
+			if tSpinType > 0:
+				PlayAudio(sfxClearSpin)
+				if not inB2B:
+					inB2B = true
+				else:
+					attack += 1
+					b2b += 1
+				if tSpinType == 2:
+					attack += 4
+			else:
+				inB2B = false
+				b2b = 0
+				PlayAudio(sfxClearLine)
+		4:
+			attack += 4
+			if not inB2B:
+				inB2B = true
+				PlayAudio(sfxClearTetra)
+			else:
+				attack += 1
+				b2b += 1
+				PlayAudio(sfxClearB2B)
+	Attack.emit(attack)
 
 func IsCellEmpty(pos: Vector2i) -> bool:
 	var collision = false
@@ -574,6 +735,8 @@ func IsCellEmpty(pos: Vector2i) -> bool:
 	if pos.x >= 0 and pos.x <= boardWidth and pos.y <= boardHeight:
 		if pos in usedCells:
 			collision = true
+	else:
+		collision = true
 	if pos.x <0 || pos.x >=boardWidth:
 		collision = true
 	return not collision #Inverts value cause cell's not empty
@@ -642,18 +805,27 @@ func SpawnNewPiece():
 		queueManager.UpdateQueue(queuePiece, queue)
 		queue += 1
 
-func ScanFullLines():
+func PlayAudio(clip):
+	var player = audioPlayer.instantiate()
+	add_child(player)
+	player.stream = clip
+	player.play()
+
+func ScanFullLines() -> int:
 	var row : int = boardHeight
-	while row > 0:
+	var linesCleared : int = 0
+	while row > -19:
 		var count = 0
 		for i in range(boardWidth):
 			if not IsCellEmpty(Vector2i(i, row)):
 				count += 1
-		#if row is full then erase it
+		#Erase Method
 		if count == boardWidth:
 			MoveLinesDown(row)
+			linesCleared += 1
 		else:
 			row -= 1
+	return linesCleared
 
 func ClearLine(y): #Unused
 	for x in range(0, boardWidth):
@@ -675,6 +847,8 @@ func TriggerHold():
 	if canHold:
 		currentPiece = holdManager.TransferSwapPiece()
 		ClearActivePiece()
+		PlayAudio(sfxHold)
+		lastActRotation = false
 		if currentPiece == "":
 			SpawnNewPiece()
 		else:

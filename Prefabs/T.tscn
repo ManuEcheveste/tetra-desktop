@@ -1,7 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://ty2g0pe5jdeg"]
+[gd_scene load_steps=11 format=3 uid="uid://2hhuof17otjo"]
 
 [ext_resource type="Texture2D" uid="uid://cxiw211iuay8n" path="res://Assets/GemygemSkin.png" id="1_qmbnq"]
-[ext_resource type="Script" path="res://Assets/Scripts/BoardController.cs" id="2_dtd68"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_eoxxb"]
 tile_data = PackedInt32Array(0, 131072, 0, 65536, 131072, 0, 1, 131072, 0, 65537, 131072, 0)
@@ -58,4 +57,3 @@ pattern_6 = SubResource("TileMapPattern_0ak8g")
 tile_map_data = PackedByteArray(0, 0, 0, 0, 1, 0, 0, 0, 6, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 6, 0, 0, 0, 0, 0, 2, 0, 1, 0, 0, 0, 6, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0)
 tile_set = SubResource("TileSet_22xyx")
 navigation_enabled = false
-script = ExtResource("2_dtd68")

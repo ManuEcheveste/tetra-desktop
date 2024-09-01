@@ -58,11 +58,11 @@ func UpdateQueue(piece, pos):
 		4:
 			newPos = Vector2i(0,12)
 	ClearPiece(newPos)
-	print("Calling draw queue: ", piece)
+	#print("Calling draw queue: ", piece)
 	DrawPiece(tileMap, pieceData, newPos)
 	
 func DrawPiece(tilemap, piece, pos):
-	print("Drawing")
+	#print("Drawing")
 	var colour
 	if currentPiece == "I":
 		colour = Vector2i(4,0)
@@ -79,7 +79,7 @@ func DrawPiece(tilemap, piece, pos):
 	elif currentPiece == "Z":
 		colour = Vector2i(0,0)
 	else:
-		print("error")
+		print("error in queue display")
 		colour = Vector2i(8,0)
 		
 	match tilemap:

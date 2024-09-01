@@ -246,5 +246,6 @@ position = Vector2(379, 239)
 scale = Vector2(0.332632, 0.331931)
 texture = ExtResource("6_6psay")
 
+[connection signal="Attack" from="MainGrid" to="DisplayInfo" method="Attack"]
 [connection signal="LockedPiece" from="MainGrid" to="MainGrid/HoldGrid" method="EnableHold"]
 [connection signal="LockedPiece" from="MainGrid" to="DisplayInfo" method="PlacedPiece"]
