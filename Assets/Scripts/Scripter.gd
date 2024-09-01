@@ -1,6 +1,6 @@
 extends Node
 
-var P1_Name: String
+var P1_Name: String = "ManuEcheveste"
 var P1_ARR: int = 0 #Automatic Repeat Rate
 var P1_DAS: int = 140 #Delayed Autoshift
 var P1_SDF: int = 40 #Soft Drop Factor

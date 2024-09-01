@@ -1,12 +1,11 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1725135050
-export_presets.cfg::TextFile::-1::1725089348::0::1::::<><>::
+::res://::1725180030
+export_presets.cfg::TextFile::-1::1725160582::0::1::::<><>::
 icon.svg::CompressedTexture2D::1875632096193073955::1724644546::1724898683::1::::<><>::
 README.md::TextFile::-1::1725087845::0::1::::<><>::
-::res://Assets/::1725139242
-GemygemSkin.png::CompressedTexture2D::6405085189531977103::1724576212::1724898683::1::::<><>::
+::res://Assets/::1725177680
 ::res://Assets/Audio/::1725139247
-::res://Assets/Audio/SFX/::1725155066
+::res://Assets/Audio/SFX/::1725184470
 ClearB2B.wav::AudioStreamWAV::6452911474476182089::1725155066::1725155071::1::::<><>::
 ClearSpin.wav::AudioStreamWAV::2137810545646748471::1725155025::1725155071::1::::<><>::
 HardDrop.wav::AudioStreamWAV::1272445042889872488::1725141429::1725141431::1::::<><>::
@@ -19,32 +18,50 @@ Rotate.wav::AudioStreamWAV::5563887556474932958::1725139948::1725140076::1::::<>
 SoftDrop.wav::AudioStreamWAV::5506329703254008426::1725143571::1725143588::1::::<><>::
 Spin.wav::AudioStreamWAV::7022657074486393746::1725143587::1725143588::1::::<><>::
 TetraClear.wav::AudioStreamWAV::7028511258747912655::1725141940::1725141942::1::::<><>::
-::res://Assets/Fonts/::1724898683
+TopOut.wav::AudioStreamWAV::4852547538335722398::1725184470::1725184481::1::::<><>::
+::res://Assets/Fonts/::1725173995
+KARNIBLA.ttf::FontFile::6534260917604063895::1725173995::1725173995::1::::<><>::
+KARNIVOB.ttf::FontFile::7696841611226448454::1725173995::1725173995::1::::<><>::
+KARNIVOL.ttf::FontFile::6704890949858092080::1725173995::1725173995::1::::<><>::
+KARNIVOR.ttf::FontFile::5730805769316734693::1725173995::1725173995::1::::<><>::
 Prom.ttf::FontFile::7368214461732993805::1724608582::1724898683::1::::<><>::
-::res://Assets/Scenes/::1724909510
-MainGame.tscn::PackedScene::1396590759284005488::1724909510::0::1::::<><>::uid://cdmuarr6mdqy2::::res://Prefabs/Board.tscn
-::res://Assets/Scripts/::1725153839
-BoardManager.gd::GDScript::-1::1725153839::0::1::::<>TileMapLayer<>::
-DisplayInfoManager.gd::GDScript::-1::1725101750::0::1::::<>Control<>::
-HoldManager.gd::GDScript::-1::1724990183::0::1::::<>TileMapLayer<>::
-QueueManager.gd::GDScript::-1::1725099093::0::1::::<>TileMapLayer<>::
+Spectrashell.otf::FontFile::931088154816357117::1725172889::1725172890::1::::<><>::
+zrnic rg.otf::FontFile::8301241306418857780::1725172892::1725172892::1::::<><>::
+::res://Assets/Scenes/::1725184359
+MainGame.tscn::PackedScene::1396590759284005488::1725184359::0::1::::<><>::res://Assets/Scripts/GameModes/VS-Manager.gd<>uid://cdmuarr6mdqy2::::res://Prefabs/BoardBattle.tscn<>uid://vvq3nfcryfj8::::res://Assets/Sprites/BGNs/tetrio-coverart-alt.png<>uid://nja5ecqggsmn::::res://Assets/Fonts/Spectrashell.otf
+MainMenu.tscn::PackedScene::7920273971984547456::1725184358::0::1::::<><>::uid://dhwn4eqh0rbri::::res://Assets/Fonts/KARNIVOB.ttf<>uid://c0dik78i01yl8::::res://Assets/Fonts/KARNIBLA.ttf<>uid://vvq3nfcryfj8::::res://Assets/Sprites/BGNs/tetrio-coverart-alt.png
+::res://Assets/Scripts/::1725184313
 AudioPlayer.gd::GDScript::-1::1725141318::0::1::::<>AudioStreamPlayer<>::
-Scripter.gd::GDScript::-1::1725088617::0::1::::<>Node<>::
-::res://Assets/Sprites/::1724987543
+BoardManager.gd::GDScript::-1::1725184102::0::1::::<>Control<>::
+DisplayInfoManager.gd::GDScript::-1::1725184313::0::1::::<>Control<>::
+HoldManager.gd::GDScript::-1::1725183957::0::1::::<>TileMapLayer<>::
+QueueManager.gd::GDScript::-1::1725099093::0::1::::<>TileMapLayer<>::
+Scripter.gd::GDScript::-1::1725170817::0::1::::<>Node<>::
+::res://Assets/Scripts/GameModes/::1725184358
+VS-Manager.gd::GDScript::-1::1725184358::0::1::::<>Control<>::
+::res://Assets/Sprites/::1725181614
 Board.svg::CompressedTexture2D::8831840431374862656::1724628648::1724898683::1::::<><>::
 HOLD.png::CompressedTexture2D::9070295155967239211::1724612778::1724898683::1::::<><>::
+me when no bugs.png::CompressedTexture2D::2079759976829488195::1725177690::1725180030::1::::<><>::
 QUEUE.png::CompressedTexture2D::6950866803624588904::1724612782::1724898683::1::::<><>::
 S Q U A R E.png::CompressedTexture2D::8572551359801142341::1724581366::1724898683::1::::<><>::
-Screenshot 2024-08-29 211210.png::CompressedTexture2D::49021908305799889::1724987543::1724987543::1::::<><>::
-::res://Exports/::1725090032
-Tetra Desktop.apple-touch-icon.png::CompressedTexture2D::585593979939874000::1725089348::1725090032::1::::<><>::
-Tetra Desktop.icon.png::CompressedTexture2D::7175589207183021704::1725089348::1725090032::1::::<><>::
-Tetra Desktop.png::CompressedTexture2D::1633311243355911536::1725089348::1725090032::1::::<><>::
-::res://Prefabs/::1725154182
-Board.tscn::PackedScene::5009395691787644803::1725153839::0::1::::<><>::uid://dueuwyx80a3sb::::res://Assets/Sprites/S Q U A R E.png<>res://Assets/Scripts/BoardManager.gd<>uid://cxiw211iuay8n::::res://Assets/GemygemSkin.png<>res://Assets/Scripts/HoldManager.gd<>res://Assets/Scripts/QueueManager.gd<>uid://d2hyo3b2mesr8::::res://Assets/Sprites/HOLD.png<>uid://c6bb04nnk8br1::::res://Assets/Sprites/QUEUE.png<>uid://x0nbrw3mfmf::::res://Assets/Sprites/Screenshot 2024-08-29 211210.png<>res://Assets/Scripts/DisplayInfoManager.gd
+::res://Assets/Sprites/BGNs/::1725181619
+tetrio-coverart-alt.png::CompressedTexture2D::1518339813989647799::1725181618::1725181619::1::::<><>::
+::res://Assets/Sprites/Skins/::1725177682
+GemygemSkin.png::CompressedTexture2D::6405085189531977103::1724576212::1725177682::1::::<><>::
+::res://Exports/::1725160693
+Tetra Desktop.apple-touch-icon.png::CompressedTexture2D::585593979939874000::1725160581::1725090032::1::::<><>::
+Tetra Desktop.icon.png::CompressedTexture2D::7175589207183021704::1725160581::1725090032::1::::<><>::
+Tetra Desktop.png::CompressedTexture2D::1633311243355911536::1725160581::1725090032::1::::<><>::
+::res://Prefabs/::1725184358
 AudioPlayer.tscn::PackedScene::802842931440825494::1725141323::0::1::::<><>::res://Assets/Scripts/AudioPlayer.gd
-T.tscn::PackedScene::-1::1725154182::0::1::::<><>::
+BoardBattle.tscn::PackedScene::5009395691787644803::1725184358::0::1::::<><>::uid://dueuwyx80a3sb::::res://Assets/Sprites/S Q U A R E.png<>uid://d0e0onwni5qdf::::res://Themes/Tetraminos.tres<>res://Assets/Scripts/BoardManager.gd<>res://Assets/Scripts/HoldManager.gd<>res://Assets/Scripts/QueueManager.gd<>res://Assets/Scripts/DisplayInfoManager.gd<>uid://c8etue40f6gr1::::res://Themes/SmallNumbers.tres<>uid://61le6g480owo::::res://Themes/BigNumbers.tres<>uid://cnwbsfadh84a0::::res://Assets/Fonts/KARNIVOR.ttf<>uid://d2hyo3b2mesr8::::res://Assets/Sprites/HOLD.png<>uid://c6bb04nnk8br1::::res://Assets/Sprites/QUEUE.png
+T.tscn::PackedScene::1910010901608336380::1725177682::0::1::::<><>::uid://cxiw211iuay8n::::res://Assets/Sprites/Skins/GemygemSkin.png
 ::res://References/::1725140076
 2020-05-30_02-07-18.png::CompressedTexture2D::2844323655034455114::1725097283::1725097572::1::::<><>::
 das-issue.png::CompressedTexture2D::172467716497991382::1725097038::1725097572::1::::<><>::
 tetrio.png::CompressedTexture2D::1614956654628116341::1725135751::1725140076::1::::<><>::
+::res://Themes/::1725177682
+BigNumbers.tres::Theme::2230204643336015658::1725174148::0::1::::<><>::uid://dqjgh4uqwylv5::::res://Assets/Fonts/zrnic rg.otf
+SmallNumbers.tres::Theme::7098520313234692508::1725174148::0::1::::<><>::uid://dqjgh4uqwylv5::::res://Assets/Fonts/zrnic rg.otf
+Tetraminos.tres::TileSet::8923784296371979963::1725177682::0::1::::<><>::uid://cxiw211iuay8n::::res://Assets/Sprites/Skins/GemygemSkin.png

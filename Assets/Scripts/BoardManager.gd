@@ -1,12 +1,17 @@
-extends TileMapLayer
+extends Control
 
 var isPlayerOne:bool
+var gameActive: bool = true #will change later to be false default
 var isDebug = false
-@onready var activeGrid = $ActiveGrid
-@onready var ghostGrid = $GhostGrid
-@onready var dangerGrid = $DangerGrid
-@onready var holdManager = $HoldGrid
-@onready var queueManager = $QueueDisplayManager
+@onready var mainGrid = $MainGrid
+@onready var activeGrid = $MainGrid/ActiveGrid
+@onready var ghostGrid = $MainGrid/GhostGrid
+@onready var dangerGrid = $MainGrid/DangerGrid
+@onready var holdManager = $MainGrid/HoldGrid
+@onready var queueManager = $MainGrid/QueueDisplayManager
+
+@onready var nameLabel = $DisplayInfo/NameLabel
+
 
 #region Audio
 var audioPlayer= preload("res://Prefabs/AudioPlayer.tscn")
@@ -24,11 +29,14 @@ var sfxClearTetra = preload("res://Assets/Audio/SFX/TetraClear.wav")
 var sfxSpin = preload("res://Assets/Audio/SFX/Spin.wav")
 var sfxClearSpin = preload("res://Assets/Audio/SFX/ClearSpin.wav")
 var sfxClearB2B = preload("res://Assets/Audio/SFX/ClearB2B.wav")
+
+var sfxTopOut = preload("res://Assets/Audio/SFX/TopOut.wav")
 #endregion
 
 
 signal LockedPiece
 signal Attack(lines: int)
+signal TopedOut
 
 #tetrominoes
 var I_0 := [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1)]
@@ -166,6 +174,7 @@ var SDF = Scripter.P1_SDF
 
 func _ready():
 	await get_tree().create_timer(0.2).timeout #Necesario para que no explote la QUEUE (aun no se adignan las tiles de I y O)
+	nameLabel.text = Scripter.P1_Name
 	StartNewGame()
 
 func StartNewGame():
@@ -241,63 +250,75 @@ func _process(delta):
 	#endregion
 
 func ApplyGravity():
-	ClearActivePiece()
-	var canMoveDown = true
-	for block in currentPieceTiles:
-		var newPos = currentPieceCoords + block + Vector2i(0,1)
-		if newPos.y >= boardHeight or not IsCellEmpty(newPos):
-			canMoveDown = false
-			break
-	if canMoveDown:
-		isLockTimerActive = false
-		currentPieceCoords.y += 1
-		if(isSoftDroping):
-			PlayAudio(sfxSoftDrop)
-	else:
-		isLockTimerActive = true
-	DrawPiece(0, currentPieceTiles, currentPieceCoords)
+	if gameActive:
+		ClearActivePiece()
+		var canMoveDown = true
+		for block in currentPieceTiles:
+			var newPos = currentPieceCoords + block + Vector2i(0,1)
+			if newPos.y >= boardHeight or not IsCellEmpty(newPos):
+				canMoveDown = false
+				break
+		if canMoveDown:
+			isLockTimerActive = false
+			currentPieceCoords.y += 1
+			if(isSoftDroping):
+				PlayAudio(sfxSoftDrop)
+		else:
+			isLockTimerActive = true
+		DrawPiece(0, currentPieceTiles, currentPieceCoords)
 	
 func _input(event):
 	if event.is_action_pressed("P1_MV_L"):
-		MovePiece(0)
-		movementPriority = 0
-		isMovingLeft = true
-		currentDAS = 0
-		currentARR = 0
+		if gameActive:
+			MovePiece(0)
+			movementPriority = 0
+			isMovingLeft = true
+			currentDAS = 0
+			currentARR = 0
 	if event.is_action_released("P1_MV_L"):
-		isMovingLeft = false
-		currentDAS = 0
-		currentARR = 0
+		if gameActive:
+			isMovingLeft = false
+			currentDAS = 0
+			currentARR = 0
 		#;aybe reset some values, not sure if make it here or its own function
 	if event.is_action_pressed("P1_MV_R"):
-		MovePiece(1)
-		movementPriority = 1
-		isMovingRight = true
-		currentDAS = 0
-		currentARR = 0
+		if gameActive:
+			MovePiece(1)
+			movementPriority = 1
+			isMovingRight = true
+			currentDAS = 0
+			currentARR = 0
 	if event.is_action_released("P1_MV_R"):
-		isMovingRight = false
-		currentDAS = 0
-		currentARR = 0
+		if gameActive:
+			isMovingRight = false
+			currentDAS = 0
+			currentARR = 0
 	
 	if event.is_action_pressed("P1_CW"):
-		RotatePiece(1)
+		if gameActive:
+			RotatePiece(1)
 	if event.is_action_pressed("P1_CCW"):
-		RotatePiece(0)
+		if gameActive:
+			RotatePiece(0)
 	if event.is_action_pressed("P1_180"):
-		RotatePiece(2)
+		if gameActive:
+			RotatePiece(2)
 		
 	if event.is_action_pressed("P1_HD"):
-		HardDrop()
+		if gameActive:
+			HardDrop()
 		
 	if event.is_action_pressed("P1_SD"):
-		#SoftDrop()#temp
-		isSoftDroping = true
+		if gameActive:
+			#SoftDrop()#temp
+			isSoftDroping = true
 	if event.is_action_released("P1_SD"):
-		isSoftDroping = false
+		if gameActive:
+			isSoftDroping = false
 		
 	if event.is_action_pressed("P1_HOLD"):
-		TriggerHold()
+		if gameActive:
+			TriggerHold()
 		
 #region Drawing
 func DrawPiece(grid, piece, pos):
@@ -335,7 +356,7 @@ func DrawPiece(grid, piece, pos):
 			activeGrid.set_cell(pos + i, skin, colour)
 	elif grid == 1: #Default Board
 		for i in piece:
-			set_cell(pos + i, skin, colour)
+			mainGrid.set_cell(pos + i, skin, colour)
 	elif grid == 2: #Ghost Grid
 		colour = Vector2i(7,0)
 		for i in piece:
@@ -425,7 +446,7 @@ func MovePiece(dir):
 			collision = true
 	
 	if not collision:
-		var usedCells = get_used_cells()
+		var usedCells = mainGrid.get_used_cells()
 		for block in currentPieceTiles:
 			var newPosTile = tmpPos + block
 			if newPosTile in usedCells:
@@ -609,13 +630,13 @@ func LockPiece(suppressLockSound = false):
 		
 	var linesCleared = ScanFullLines()
 	
-	if get_used_cells().is_empty():
+	if mainGrid.get_used_cells().is_empty():
 		AttackCalculator(linesCleared, true)
 	else:
 		AttackCalculator(linesCleared)
 	SpawnNewPiece()
 	if not suppressLockSound:
-		PlayAudio(sfxLockPiece)
+		PlayAudio(sfxLockPiece)	
 	LockedPiece.emit()
 
 func IsTSpin() -> int:
@@ -636,7 +657,7 @@ func IsTSpin() -> int:
 			var checkPos = currentPieceCoords + corner
 			if not IsCellEmpty(checkPos):
 				if isDebug:
-					set_cell(checkPos, 0, Vector2i(11,0))
+					mainGrid.set_cell(checkPos, 0, Vector2i(11,0))
 				filledCorners += 1
 				
 		if filledCorners >= 1:
@@ -731,8 +752,8 @@ func AttackCalculator(linesCleared: int, perfectCleared: bool = false):
 
 func IsCellEmpty(pos: Vector2i) -> bool:
 	var collision = false
-	var usedCells = get_used_cells()
-	if pos.x >= 0 and pos.x <= boardWidth and pos.y <= boardHeight:
+	var usedCells = mainGrid.get_used_cells()
+	if pos.x >= 0 and pos.x <= boardWidth and pos.y < boardHeight:
 		if pos in usedCells:
 			collision = true
 	else:
@@ -747,16 +768,21 @@ func IsCellEmpty(pos: Vector2i) -> bool:
 #endregion
 
 func GameOver():
-	get_tree().quit()
+	PlayAudio(sfxTopOut)
+	gameActive = false
+	TopedOut.emit()
 	pass
 
 
 
 func SpawnNewPiece():
+	tSpinType = 0
+	lastActRotation = false
 	if currentBag.size() < 6:
 		GenerateNewBag(false)
 		
 	var newPiece = currentBag.pop_front()
+	#newPiece = T
 	#print(newPiece)
 	currentPieceRotation = 0
 	var newPos: Vector2i = Vector2i(3,-3)
@@ -765,7 +791,7 @@ func SpawnNewPiece():
 	DrawPiece(0, newPiece[currentPieceRotation], newPos)
 	var collision = false
 	for block in currentPieceTiles:
-		var usedCells = get_used_cells()
+		var usedCells = mainGrid.get_used_cells()
 		if currentPieceCoords + block in usedCells:
 			collision = true
 			GameOver()
@@ -812,7 +838,7 @@ func PlayAudio(clip):
 	player.play()
 
 func ScanFullLines() -> int:
-	var row : int = boardHeight
+	var row : int = boardHeight - 1
 	var linesCleared : int = 0
 	while row > -19:
 		var count = 0
@@ -829,18 +855,18 @@ func ScanFullLines() -> int:
 
 func ClearLine(y): #Unused
 	for x in range(0, boardWidth):
-		erase_cell(Vector2i(x, y))
+		mainGrid.erase_cell(Vector2i(x, y))
 
 func MoveLinesDown(startY):
 	var tmpBoard
 	#print("Start moving lines: ", startY)
 	for y in range(startY, -19, -1):
 		for x in range(boardWidth):
-			tmpBoard = get_cell_atlas_coords(Vector2i(x , y - 1))
+			tmpBoard = mainGrid.get_cell_atlas_coords(Vector2i(x , y - 1))
 			if(tmpBoard == Vector2i(-1, -1)):
-				erase_cell(Vector2i(x ,y))
+				mainGrid.erase_cell(Vector2i(x ,y))
 			else:
-				set_cell(Vector2i(x, y ), skin, tmpBoard)
+				mainGrid.set_cell(Vector2i(x, y ), skin, tmpBoard)
 
 func TriggerHold():
 	var canHold = holdManager.SwapHoldPiece(currentPiece)
@@ -855,36 +881,38 @@ func TriggerHold():
 			SetManualPiece(currentPiece)
 
 func SetManualPiece(piece):
-	currentPieceRotation = 0
-	match piece:
-			"I":
-				currentPiece = "I"
-				DrawPiece(0,I[0], Vector2i(3,-3))
-			"J":
-				currentPiece = "J"
-				DrawPiece(0,J[0], Vector2i(3,-3))
-			"L":
-				currentPiece = "L"
-				DrawPiece(0,L[0], Vector2i(3,-3))
-			"O":
-				currentPiece = "O"
-				DrawPiece(0,O[0], Vector2i(4,-3))
-			"T":
-				currentPiece = "T"
-				DrawPiece(0,T[0], Vector2i(3,-3))
-			"S":
-				currentPiece = "S"
-				DrawPiece(0,S[0], Vector2i(3,-3))
-			"Z":
-				currentPiece = "Z"
-				DrawPiece(0,Z[0], Vector2i(3,-3))
-	var collision = false
-	for block in currentPieceTiles:
-		var usedCells = get_used_cells()
-		if currentPieceCoords + block in usedCells:
-			collision = true
-			GameOver()
-			break
-	if not collision:
-		DrawGhost()
-		DrawDanger()
+	if gameActive:
+		currentPieceRotation = 0
+		match piece:
+				"I":
+					currentPiece = "I"
+					DrawPiece(0,I[0], Vector2i(3,-3))
+				"J":
+					currentPiece = "J"
+					DrawPiece(0,J[0], Vector2i(3,-3))
+				"L":
+					currentPiece = "L"
+					DrawPiece(0,L[0], Vector2i(3,-3))
+				"O":
+					currentPiece = "O"
+					DrawPiece(0,O[0], Vector2i(4,-3))
+				"T":
+					currentPiece = "T"
+					DrawPiece(0,T[0], Vector2i(3,-3))
+				"S":
+					currentPiece = "S"
+					DrawPiece(0,S[0], Vector2i(3,-3))
+				"Z":
+					currentPiece = "Z"
+					DrawPiece(0,Z[0], Vector2i(3,-3))
+		var collision = false
+		for block in currentPieceTiles:
+			var usedCells = mainGrid.get_used_cells()
+			if currentPieceCoords + block in usedCells:
+				collision = true
+				GameOver()
+				break
+		if not collision:
+			DrawGhost()
+			DrawDanger()
+		lastActRotation = false

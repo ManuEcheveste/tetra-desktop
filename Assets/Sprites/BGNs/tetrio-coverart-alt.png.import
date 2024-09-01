@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxiw211iuay8n"
-path="res://.godot/imported/GemygemSkin.png-28319bc8375b24595070566594d29869.ctex"
+uid="uid://vvq3nfcryfj8"
+path="res://.godot/imported/tetrio-coverart-alt.png-46f15254f77d8247a9cbc3053c0af257.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/GemygemSkin.png"
-dest_files=["res://.godot/imported/GemygemSkin.png-28319bc8375b24595070566594d29869.ctex"]
+source_file="res://Assets/Sprites/BGNs/tetrio-coverart-alt.png"
+dest_files=["res://.godot/imported/tetrio-coverart-alt.png-46f15254f77d8247a9cbc3053c0af257.ctex"]
 
 [params]
 

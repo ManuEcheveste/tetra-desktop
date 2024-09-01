@@ -19,8 +19,6 @@ var N := [Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0)]
 func _ready():
 	ResetHold()
 	clear()
-func _process(delta):
-	pass
 
 func SwapHoldPiece(newPiece) -> bool:
 	var canSwap = canHold

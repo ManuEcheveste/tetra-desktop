@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://61le6g480owo"]
+
+[ext_resource type="FontFile" uid="uid://dqjgh4uqwylv5" path="res://Assets/Fonts/zrnic rg.otf" id="1_gw7bw"]
+
+[resource]
+Label/font_sizes/font_size = 40
+Label/fonts/font = ExtResource("1_gw7bw")

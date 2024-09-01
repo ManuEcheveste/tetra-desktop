@@ -4,3 +4,12 @@ res://Prefabs/Board.tscn
 res://Assets/Scripts/AudioPlayer.gd
 res://Prefabs/T.tscn
 res://Assets/Scripts/DisplayInfoManager.gd
+res://Assets/Scripts/HoldManager.gd
+res://Assets/Scripts/Scripter.gd
+res://Themes/BigNumbers.tres
+res://Themes/SmallNumbers.tres
+res://Assets/Scenes/MainMenu.tscn
+res://Prefabs/BoardBattle.tscn
+res://Assets/Scenes/MainGame.tscn
+res://Assets/Scripts/GameModes/VS-Manager.gd
+res://Assets/Scripts/Menus/MainMenuManager.gd

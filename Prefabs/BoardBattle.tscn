@@ -1,0 +1,266 @@
+[gd_scene load_steps=13 format=3 uid="uid://cdmuarr6mdqy2"]
+
+[ext_resource type="Texture2D" uid="uid://dueuwyx80a3sb" path="res://Assets/Sprites/S Q U A R E.png" id="1_210rk"]
+[ext_resource type="TileSet" uid="uid://d0e0onwni5qdf" path="res://Themes/Tetraminos.tres" id="2_lbd4t"]
+[ext_resource type="Script" path="res://Assets/Scripts/BoardManager.gd" id="3_l46in"]
+[ext_resource type="Script" path="res://Assets/Scripts/HoldManager.gd" id="4_j8n4r"]
+[ext_resource type="Script" path="res://Assets/Scripts/QueueManager.gd" id="5_d1nef"]
+[ext_resource type="Script" path="res://Assets/Scripts/DisplayInfoManager.gd" id="6_7tbkf"]
+[ext_resource type="Theme" uid="uid://c8etue40f6gr1" path="res://Themes/SmallNumbers.tres" id="7_4mvja"]
+[ext_resource type="Theme" uid="uid://61le6g480owo" path="res://Themes/BigNumbers.tres" id="8_mlglv"]
+[ext_resource type="FontFile" uid="uid://cnwbsfadh84a0" path="res://Assets/Fonts/KARNIVOR.ttf" id="9_ctqq6"]
+[ext_resource type="Texture2D" uid="uid://d2hyo3b2mesr8" path="res://Assets/Sprites/HOLD.png" id="10_2st3m"]
+[ext_resource type="Texture2D" uid="uid://c6bb04nnk8br1" path="res://Assets/Sprites/QUEUE.png" id="11_qylsn"]
+
+[sub_resource type="Theme" id="Theme_ckeim"]
+Label/font_sizes/font_size = 25
+Label/fonts/font = ExtResource("9_ctqq6")
+
+[node name="Board" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -168.0
+offset_top = -317.0
+offset_right = 132.0
+offset_bottom = 283.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("3_l46in")
+
+[node name="Margin" type="Node2D" parent="."]
+position = Vector2(150, 300)
+scale = Vector2(10.2667, 20.2667)
+
+[node name="MarginL" type="Sprite2D" parent="Margin"]
+position = Vector2(-14.8052, 1.63913e-06)
+scale = Vector2(0.012987, 0.986842)
+texture = ExtResource("1_210rk")
+
+[node name="MarginR" type="Sprite2D" parent="Margin"]
+position = Vector2(14.8052, 1.63913e-06)
+scale = Vector2(0.012987, 0.986842)
+texture = ExtResource("1_210rk")
+
+[node name="MarginB" type="Sprite2D" parent="Margin"]
+position = Vector2(0, 14.9013)
+scale = Vector2(1, 0.00657901)
+texture = ExtResource("1_210rk")
+
+[node name="GridBGN" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.392157)
+position = Vector2(150, 300)
+scale = Vector2(10, 20)
+texture = ExtResource("1_210rk")
+
+[node name="MainGrid" type="TileMapLayer" parent="."]
+tile_set = ExtResource("2_lbd4t")
+navigation_enabled = false
+
+[node name="ActiveGrid" type="TileMapLayer" parent="MainGrid"]
+tile_set = ExtResource("2_lbd4t")
+navigation_enabled = false
+
+[node name="GhostGrid" type="TileMapLayer" parent="MainGrid"]
+z_index = -1
+tile_set = ExtResource("2_lbd4t")
+navigation_enabled = false
+
+[node name="DangerGrid" type="TileMapLayer" parent="MainGrid"]
+z_index = -1
+tile_set = ExtResource("2_lbd4t")
+navigation_enabled = false
+
+[node name="HoldGrid" type="TileMapLayer" parent="MainGrid"]
+position = Vector2(-125, 40)
+tile_set = ExtResource("2_lbd4t")
+navigation_enabled = false
+script = ExtResource("4_j8n4r")
+
+[node name="QueueDisplayManager" type="TileMapLayer" parent="MainGrid"]
+position = Vector2(335, 42)
+tile_set = ExtResource("2_lbd4t")
+navigation_enabled = false
+script = ExtResource("5_d1nef")
+
+[node name="TileMapO" type="TileMapLayer" parent="MainGrid/QueueDisplayManager"]
+position = Vector2(16, 0)
+tile_set = ExtResource("2_lbd4t")
+navigation_enabled = false
+
+[node name="TileMapI" type="TileMapLayer" parent="MainGrid/QueueDisplayManager"]
+position = Vector2(-14, 15)
+tile_set = ExtResource("2_lbd4t")
+navigation_enabled = false
+
+[node name="DisplayInfo" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+script = ExtResource("6_7tbkf")
+
+[node name="PiecesLabel" type="Label" parent="DisplayInfo"]
+layout_mode = 0
+offset_left = -60.0
+offset_top = -185.0
+offset_right = -10.0
+offset_bottom = -160.0
+theme = ExtResource("7_4mvja")
+text = "PIECES"
+horizontal_alignment = 2
+
+[node name="Data" type="HBoxContainer" parent="DisplayInfo/PiecesLabel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -80.0
+offset_top = 15.0
+offset_bottom = 63.0
+grow_horizontal = 0
+alignment = 2
+
+[node name="TotalPieces" type="Label" parent="DisplayInfo/PiecesLabel/Data"]
+layout_mode = 2
+theme = ExtResource("8_mlglv")
+text = "0,"
+horizontal_alignment = 2
+
+[node name="PPS" type="Label" parent="DisplayInfo/PiecesLabel/Data"]
+custom_minimum_size = Vector2(0, 37)
+layout_mode = 2
+theme = ExtResource("7_4mvja")
+text = "0.00/S"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="AttackLabel" type="Label" parent="DisplayInfo"]
+layout_mode = 0
+offset_left = -60.0
+offset_top = -120.0
+offset_right = -8.0
+offset_bottom = -95.0
+theme = ExtResource("7_4mvja")
+text = "ATTACK"
+horizontal_alignment = 2
+
+[node name="Data" type="HBoxContainer" parent="DisplayInfo/AttackLabel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -80.0
+offset_top = 15.0
+offset_bottom = 63.0
+grow_horizontal = 0
+alignment = 2
+
+[node name="TotalAttack" type="Label" parent="DisplayInfo/AttackLabel/Data"]
+layout_mode = 2
+theme = ExtResource("8_mlglv")
+text = "0,"
+horizontal_alignment = 2
+
+[node name="APM" type="Label" parent="DisplayInfo/AttackLabel/Data"]
+custom_minimum_size = Vector2(0, 37)
+layout_mode = 2
+theme = ExtResource("7_4mvja")
+text = "0.00/M"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="VSLabel" type="Label" parent="DisplayInfo"]
+layout_mode = 0
+offset_left = 310.0
+offset_top = -120.0
+offset_right = 381.0
+offset_bottom = -95.0
+theme = ExtResource("7_4mvja")
+text = "VS SCORE"
+
+[node name="Data" type="HBoxContainer" parent="DisplayInfo/VSLabel"]
+layout_mode = 1
+offset_top = 15.0
+offset_right = 84.0
+offset_bottom = 63.0
+
+[node name="ScoreINT" type="Label" parent="DisplayInfo/VSLabel/Data"]
+layout_mode = 2
+theme = ExtResource("8_mlglv")
+text = "0"
+horizontal_alignment = 2
+
+[node name="ScoreDecimals" type="Label" parent="DisplayInfo/VSLabel/Data"]
+custom_minimum_size = Vector2(0, 37)
+layout_mode = 2
+theme = ExtResource("7_4mvja")
+text = ".00"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="TimeLabel" type="Label" parent="DisplayInfo"]
+layout_mode = 0
+offset_left = -60.0
+offset_top = -55.0
+offset_right = -8.0
+offset_bottom = -30.0
+theme = ExtResource("7_4mvja")
+text = "TIME"
+horizontal_alignment = 2
+
+[node name="Data" type="HBoxContainer" parent="DisplayInfo/TimeLabel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -110.0
+offset_top = 15.0
+offset_bottom = 63.0
+grow_horizontal = 0
+alignment = 2
+
+[node name="MainTime" type="Label" parent="DisplayInfo/TimeLabel/Data"]
+layout_mode = 2
+theme = ExtResource("8_mlglv")
+text = "0:00"
+horizontal_alignment = 2
+
+[node name="MS" type="Label" parent="DisplayInfo/TimeLabel/Data"]
+custom_minimum_size = Vector2(35, 37)
+layout_mode = 2
+theme = ExtResource("7_4mvja")
+text = ".000"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="NameLabel" type="Label" parent="DisplayInfo"]
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 35.0
+theme = SubResource("Theme_ckeim")
+text = "Manuecheveste"
+horizontal_alignment = 1
+
+[node name="Hold" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(-79.2172, 60.5)
+scale = Vector2(0.333546, 0.33518)
+texture = ExtResource("10_2st3m")
+
+[node name="Queue" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(379, 239)
+scale = Vector2(0.332632, 0.331931)
+texture = ExtResource("11_qylsn")
+
+[connection signal="Attack" from="." to="DisplayInfo" method="Attack"]
+[connection signal="LockedPiece" from="." to="MainGrid/HoldGrid" method="EnableHold"]
+[connection signal="LockedPiece" from="." to="DisplayInfo" method="PlacedPiece"]
+[connection signal="TopedOut" from="." to="DisplayInfo" method="StopGame"]
