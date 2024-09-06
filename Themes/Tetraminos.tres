@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=10 format=3 uid="uid://d0e0onwni5qdf"]
 
-[ext_resource type="Texture2D" uid="uid://cxiw211iuay8n" path="res://Assets/Sprites/Skins/GemygemSkin.png" id="1_oak4j"]
+[ext_resource type="Texture2D" uid="uid://cxiw211iuay8n" path="res://Assets/GemygemSkin.png" id="1_oak4j"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_eoxxb"]
 tile_data = PackedInt32Array(0, 131072, 0, 65536, 131072, 0, 1, 131072, 0, 65537, 131072, 0)

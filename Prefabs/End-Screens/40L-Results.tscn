@@ -1,0 +1,86 @@
+[gd_scene load_steps=5 format=3 uid="uid://bbaw65ob23fe8"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/EndScreen.gd" id="1_ee3l8"]
+[ext_resource type="Theme" uid="uid://61le6g480owo" path="res://Themes/BigNumbers.tres" id="1_uj8aa"]
+[ext_resource type="Theme" uid="uid://c8etue40f6gr1" path="res://Themes/SmallNumbers.tres" id="2_oj1sq"]
+[ext_resource type="FontFile" uid="uid://c0dik78i01yl8" path="res://Assets/Fonts/KARNIBLA.ttf" id="4_3na4n"]
+
+[node name="EndResults" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ee3l8")
+
+[node name="BGN" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.501961)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.165723, 0.22087, 0.216293, 1)
+
+[node name="TimeData" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -265.0
+offset_top = -118.0
+offset_right = 265.0
+offset_bottom = 118.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 2
+
+[node name="MainTime" type="Label" parent="TimeData"]
+layout_mode = 2
+theme = ExtResource("1_uj8aa")
+theme_override_font_sizes/font_size = 200
+text = "0:00"
+horizontal_alignment = 2
+
+[node name="MS" type="Label" parent="TimeData"]
+custom_minimum_size = Vector2(35, 155)
+layout_mode = 2
+theme = ExtResource("2_oj1sq")
+theme_override_font_sizes/font_size = 100
+text = ".000"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="Main Menu" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -314.0
+offset_top = -211.0
+offset_right = 314.0
+offset_bottom = -70.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("4_3na4n")
+theme_override_font_sizes/font_size = 100
+text = "Main Menu"
+
+[connection signal="pressed" from="Main Menu" to="." method="GoToMain"]

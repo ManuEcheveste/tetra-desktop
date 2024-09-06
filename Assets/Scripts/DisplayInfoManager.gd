@@ -2,23 +2,54 @@ extends Control
 
 var gameStarted: bool = false
 var totalTime: float = 0
-#Pieces
-@onready var totalPiecesLabel = $PiecesLabel/Data/TotalPieces
-@onready var ppsLabel = $PiecesLabel/Data/PPS
+var hasGarbageMeter: bool = true
+
+#region Pieces
+@onready var totalPiecesLabel = $LeftSide/Elements/PiecesLabel/Data/TotalPieces
+@onready var ppsLabel = $LeftSide/Elements/PiecesLabel/Data/PPS
 var totalPieces: int = 0
 var pps: float = 0
-#Attack
-@onready var totalAttackLabel = $AttackLabel/Data/TotalAttack
-@onready var apmLabel = $AttackLabel/Data/APM
+#endregion
+
+#region Lines
+@onready var linesCompletedLabel = $RightSide/Elements/Lines/Data/LinesCompleted
+@onready var linesGoalLabel = $RightSide/Elements/Lines/Data/LinesGoal
+var totalLines: int = 0
+
+#region Attack
+@onready var totalAttackLabel = $LeftSide/Elements/AttackLabel/Data/TotalAttack
+@onready var apmLabel = $LeftSide/Elements/AttackLabel/Data/APM
 var totalAttack: int = 0
 var apm: float = 0
+#endregion
 
-@onready var vsScoreLabel = $VSLabel/Data/ScoreINT
-@onready var vsScoreDecimalsLabel = $VSLabel/Data/ScoreDecimals
+#region VS Score
+@onready var vsScoreLabel = $RightSide/Elements/VSLabel/Data/ScoreINT
+@onready var vsScoreDecimalsLabel = $RightSide/Elements/VSLabel/Data/ScoreDecimals
+#endregion
 
-@onready var timeLabel = $TimeLabel/Data/MainTime
-@onready var timeMSLabel = $TimeLabel/Data/MS
+#region Time Clock
+@onready var timeLabel = $LeftSide/Elements/TimeLabel/Data/MainTime
+@onready var timeMSLabel = $LeftSide/Elements/TimeLabel/Data/MS
+signal time(sentTime: float)
+#endregion
 
+#region Combo and clears
+@onready var lineClearLabel = $Leyends/LineClear
+@onready var b2bValueLabel = $Leyends/B2BCombo/Value
+@onready var comboValueLabel = $Leyends/Combo/Value
+
+#region Animators
+@onready var tspinLabelAimator = $Leyends/TSpin/Animator
+@onready var lineClearLabelAnimator = $Leyends/LineClear/Animator
+@onready var b2bComboLabelAnimator = $Leyends/B2BCombo/Animator
+@onready var comboLabelAnimator = $Leyends/Combo/Animator
+
+#endregion
+
+#endregion
+
+@onready var garbageMeter = $LeftSide/GarbageMeter/GarbageBar
 
 var vsScore: float = 0
 
@@ -39,6 +70,9 @@ func Attack(lines: int):
 	totalAttack += lines
 	totalAttackLabel.text = str(totalAttack, ",")
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+
+func UpdateGarbageMetter(garbage: int):
+	garbageMeter.value = garbage
 
 func _process(delta):
 	if gameStarted:
@@ -74,12 +108,12 @@ func _process(delta):
 		if pps == 0:
 			ppsLabel.text = "0.00/S"
 		else:
-			ppsLabel.text = str(RoundToDec(pps, 2), "/S").pad_decimals(2)
+			ppsLabel.text = str(RoundToDec(pps, 2), "/S")
 			
 		if apm == 0:
 			apmLabel.text = "0.00/M"
 		else:
-			apmLabel.text = str(RoundToDec(apm, 2), "/M").pad_decimals(2)
+			apmLabel.text = str(RoundToDec(apm, 2), "/M")
 		
 		if vsScore == 0:
 			vsScoreLabel.text = "0"
@@ -89,7 +123,43 @@ func _process(delta):
 			var vsDEC: int = int(round((vsScore - vsINT)*100))
 			vsScoreLabel.text = str(vsINT)
 			vsScoreDecimalsLabel.text = str(".",vsDEC).pad_zeros(2)
-	
+
+
+
+func ShowLinesLeyend(lines):
+	match lines:
+		1:
+			lineClearLabel.text = "SINGLE"
+		2:
+			lineClearLabel.text = "DOUBLE"
+		3:
+			lineClearLabel.text = "TRIPLE"
+		4:
+			lineClearLabel.text = "TETRA"
+	if lines != 0:
+		lineClearLabelAnimator.stop()
+		lineClearLabelAnimator.play("FadeOut")
+	totalLines += lines
+	linesCompletedLabel.text = str(totalLines)
+
+func ShowTSpinLeyend():
+	tspinLabelAimator.stop()
+	tspinLabelAimator.play("FadeOut")
+
+func ShowComboLeyend(combo: int):
+	comboValueLabel.text = str(combo)
+	comboLabelAnimator.stop()
+	comboLabelAnimator.play("FadeOut")
+
+func ShowB2BComboLeyend(combo: int):
+	b2bValueLabel.text = str(combo)
+	if combo != 0:
+		b2bComboLabelAnimator.stop()
+		b2bComboLabelAnimator.play("FadeOut")
 
 func RoundToDec(num, digit):
 	return round(num * pow(10.0,digit)) / pow(10.0,digit)
+
+func SendTime():
+	time.emit(totalTime)
+	

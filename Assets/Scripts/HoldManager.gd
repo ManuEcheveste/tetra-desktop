@@ -1,16 +1,21 @@
 extends TileMapLayer
 
+@onready var tileMapRegular = $"."
+@onready var tileMapO = $TileMapO
+@onready var tileMapI = $TileMapI
 
+
+var activeTileMap = tileMapRegular
 
 var currentHold: String
 var oldHold: String
 var canHold: bool = true
 var skin = 0
 
-var I := [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1)]
+var I := [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0)]
 var J := [Vector2i(0, 0), Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1)]
 var L := [Vector2i(2, 0), Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1)]
-var O := [Vector2i(1, 0), Vector2i(2, 0), Vector2i(1, 1), Vector2i(2, 1)]
+var O := [Vector2i(0, 0), Vector2i(1, 0), Vector2i(0, 1), Vector2i(1, 1)]
 var T := [Vector2i(1, 0), Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1)]
 var S := [Vector2i(1, 0), Vector2i(2, 0), Vector2i(0, 1), Vector2i(1, 1)]
 var Z := [Vector2i(0, 0), Vector2i(1, 0), Vector2i(1, 1), Vector2i(2, 1)]
@@ -46,53 +51,46 @@ func ResetHold():
 func DrawPiece(holded, piece):
 	var colour
 	var pieceData = L
-	var canvasPosX = -125
-	var canvasPosY = 40
 	if piece == "I":
 		colour = Vector2i(4,0)
 		pieceData = I
-		canvasPosX = -140
-		canvasPosY = 25
+		activeTileMap = tileMapI
 	elif piece == "J":
 		colour = Vector2i(5,0)
 		pieceData = J
-		canvasPosX = -125
-		canvasPosY = 40
+		activeTileMap = tileMapRegular
 	elif piece == "L":
 		colour = Vector2i(1,0)
 		pieceData = L
-		canvasPosX = -125
-		canvasPosY = 40
+		activeTileMap = tileMapRegular
 	elif piece == "O":
 		colour = Vector2i(2,0)
 		pieceData = O
-		canvasPosX = -140
-		canvasPosY = 40
+		activeTileMap = tileMapO
 	elif piece == "T":
 		colour = Vector2i(6,0)
 		pieceData = T
-		canvasPosX = -125
-		canvasPosY = 40
+		activeTileMap = tileMapRegular
 	elif piece == "S":
 		colour = Vector2i(3,0)
 		pieceData = S
-		canvasPosX = -125
-		canvasPosY = 40
+		activeTileMap = tileMapRegular
 	elif piece == "Z":
 		colour = Vector2i(0,0)
 		pieceData = Z
-		canvasPosX = -125
-		canvasPosY = 40
+		activeTileMap = tileMapRegular
 	else:
 		colour = Vector2i(-1,-1)
 		pieceData = N
-		
-	position = Vector2i(canvasPosX, canvasPosY)
+		activeTileMap = tileMapRegular
 		
 	if holded == true:
 		colour = Vector2i(8,0) #HOLD COLOUR
 	
 	if pieceData != N:
-		clear()
+		tileMapRegular.clear()
+		tileMapO.clear()
+		tileMapI.clear()
+		
 		for i in pieceData:
-			set_cell(Vector2i(0,0) + i, skin, colour)
+			activeTileMap.set_cell(Vector2i(0,0) + i, skin, colour)

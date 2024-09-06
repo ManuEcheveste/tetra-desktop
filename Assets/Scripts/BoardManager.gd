@@ -1,44 +1,87 @@
 extends Control
 
-var isPlayerOne:bool
+@export var isPlayerOne:bool
 var gameActive: bool = true #will change later to be false default
 var isDebug = false
 @onready var mainGrid = $MainGrid
 @onready var activeGrid = $MainGrid/ActiveGrid
 @onready var ghostGrid = $MainGrid/GhostGrid
 @onready var dangerGrid = $MainGrid/DangerGrid
-@onready var holdManager = $MainGrid/HoldGrid
-@onready var queueManager = $MainGrid/QueueDisplayManager
+@onready var holdManager = $DisplayInfo/LeftSide/Elements/Hold/HoldGrid
+@onready var queueManager = $DisplayInfo/RightSide/Elements/Queue/QueueDisplayManager
 
 @onready var nameLabel = $DisplayInfo/NameLabel
 
 
+#region Signals
+
+signal LockedPiece
+signal Attack(lines: int)
+signal Lines(lines: int)
+signal Combo(combo: int)
+signal B2B
+signal B2BCombo(combo: int)
+signal TopedOut
+signal Garbage(lines: int)
+signal GamePaused(paused: bool)
+#endregion
+
+
 #region Audio
 var audioPlayer= preload("res://Prefabs/AudioPlayer.tscn")
+
+#region Movement/Input
 var sfxRotate = preload("res://Assets/Audio/SFX/Rotate.wav")
 var sfxMove = preload("res://Assets/Audio/SFX/Move.wav")
 var sfxSoftDrop = preload("res://Assets/Audio/SFX/SoftDrop.wav")
 var sfxHardDrop = preload("res://Assets/Audio/SFX/HardDrop.wav")
 var sfxLockPiece = preload("res://Assets/Audio/SFX/LockPiece.wav")
+var sfxHitFloor = preload("res://Assets/Audio/SFX/HitFloor.wav")
 var sfxHold = preload("res://Assets/Audio/SFX/Hold.wav")
+#endregion
 
 var sfxPC = preload("res://Assets/Audio/SFX/PerfectClear.wav")
 var sfxClearLine = preload("res://Assets/Audio/SFX/LineClear.wav")
 var sfxClearTetra = preload("res://Assets/Audio/SFX/TetraClear.wav")
 
+#region Combos
+var sfxComboBreak = preload("res://Assets/Audio/SFX/Combo/ComboBreak.wav")
+
+var sfxCombo1 = preload("res://Assets/Audio/SFX/Combo/Combo1.wav")
+var sfxCombo2 = preload("res://Assets/Audio/SFX/Combo/Combo2.wav")
+var sfxCombo3 = preload("res://Assets/Audio/SFX/Combo/Combo3.wav")
+var sfxCombo4 = preload("res://Assets/Audio/SFX/Combo/Combo4.wav")
+var sfxCombo5 = preload("res://Assets/Audio/SFX/Combo/Combo5.wav")
+var sfxCombo6 = preload("res://Assets/Audio/SFX/Combo/Combo6.wav")
+var sfxCombo7 = preload("res://Assets/Audio/SFX/Combo/Combo7.wav")
+var sfxCombo8 = preload("res://Assets/Audio/SFX/Combo/Combo8.wav")
+var sfxCombo9 = preload("res://Assets/Audio/SFX/Combo/Combo9.wav")
+var sfxCombo10 = preload("res://Assets/Audio/SFX/Combo/Combo10.wav")
+var sfxCombo11 = preload("res://Assets/Audio/SFX/Combo/Combo11.wav")
+var sfxCombo12 = preload("res://Assets/Audio/SFX/Combo/Combo12.wav")
+var sfxCombo13 = preload("res://Assets/Audio/SFX/Combo/Combo13.wav")
+var sfxCombo14 = preload("res://Assets/Audio/SFX/Combo/Combo14.wav")
+var sfxCombo15 = preload("res://Assets/Audio/SFX/Combo/Combo15.wav")
+var sfxCombo16 = preload("res://Assets/Audio/SFX/Combo/Combo16.wav")
+
+#endregion
+
+#region BackToBack
 var sfxSpin = preload("res://Assets/Audio/SFX/Spin.wav")
 var sfxClearSpin = preload("res://Assets/Audio/SFX/ClearSpin.wav")
 var sfxClearB2B = preload("res://Assets/Audio/SFX/ClearB2B.wav")
+
+var sfxB2BBreak = preload("res://Assets/Audio/SFX/B2B/B2B-Break.wav")
+var sfxB2BCombo1 = preload("res://Assets/Audio/SFX/B2B/B2B-Combo1.wav")
+var sfxB2BCombo2 = preload("res://Assets/Audio/SFX/B2B/B2B-Combo2.wav")
+var sfxB2BCombo3 = preload("res://Assets/Audio/SFX/B2B/B2B-Combo3.wav")
+#endregion
 
 var sfxTopOut = preload("res://Assets/Audio/SFX/TopOut.wav")
 #endregion
 
 
-signal LockedPiece
-signal Attack(lines: int)
-signal TopedOut
-
-#tetrominoes
+#region Tetrominos
 var I_0 := [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1)]
 var I_1 := [Vector2i(2, 0), Vector2i(2, 1), Vector2i(2, 2), Vector2i(2, 3)]
 var I_2 := [Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2)]
@@ -86,8 +129,9 @@ var N_1 := [Vector2i(-1000, 0), Vector2i(-1000, 0), Vector2i(-1000, 0), Vector2i
 var N_2 := [Vector2i(-1000, 0), Vector2i(-1000, 0), Vector2i(-1000, 0), Vector2i(-1000, 0)]
 var N_3 := [Vector2i(-1100, 0), Vector2i(-1000, 0), Vector2i(-1000, 0), Vector2i(-1000, 0)]
 var N := [N_0, N_1, N_2, N_3]
-#Kick Table
 
+
+#region KickTable
 var kickTable := {
 	"0-1": [Vector2i(0, 0), Vector2i(-1, 0), Vector2i(-1, -1), Vector2i(0, 2), Vector2i(-1, 2)],
 	"1-0": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(1, 1), Vector2i(0, -2), Vector2i(1, -2)],
@@ -117,16 +161,24 @@ var kickTableI := {
 	"2-0": [Vector2i(0, 0), Vector2i(0, 1), Vector2i(-1, 1), Vector2i(1, 1), Vector2i(-1, 0)],
 	"3-1": [Vector2i(0, 0), Vector2i(-1, 0), Vector2i(-1, -2), Vector2i(-1, -1), Vector2i(0, -2)]
 }
-
+#endregion
 
 var bag := [I, J, L, O, T, S, Z]
 var currentBag := bag.duplicate()
+#endregion
+
+var playerName: String
+
 
 #Attack/combos
 var inCombo: bool = false
 var combo: int = 0
 var inB2B: bool = false
 var b2b: int = 0
+var pendingGarbage: Array = []
+
+
+
 
 #T-Spin related Calcs
 var lastActRotation: bool = false
@@ -153,7 +205,6 @@ var gravity: float = 0.5
 var gravityTimer: float = 0
 
 #Handling
-var isPlayer1: bool
 var isMovingLeft: bool = false
 var isMovingRight: bool = false
 var movementPriority: int = 0 #0 Left, 1 Rigth
@@ -164,22 +215,60 @@ var lockTimer: float = 0.5
 var currentLockRotation: int = 0
 var maxLockRotation: int = 15 #Si llega a 15, se bloquea al instante
 
-var maxARR = Scripter.P1_ARR #Cuanto tarda en mover la pieza a la siguiente casilla
+var maxARR: int = 140 #Cuanto tarda en mover la pieza a la siguiente casilla
 var currentARR = 0
-var maxDAS = Scripter.P1_DAS #Cuanto tarda en iniciar a mover la pieza sola
+var maxDAS: int = 140 #Cuanto tarda en iniciar a mover la pieza sola
 var currentDAS = 0
-var SDF = Scripter.P1_SDF
+var SDF: int = 6
 
 
 
 func _ready():
 	await get_tree().create_timer(0.2).timeout #Necesario para que no explote la QUEUE (aun no se adignan las tiles de I y O)
-	nameLabel.text = Scripter.P1_Name
+	GetPlayerData()
+	nameLabel.text = playerName
+	GenerateNewBag(true)
 	StartNewGame()
 
+func GetPlayerData():
+	if isPlayerOne:
+		playerName = Scripter.P1_Name
+		maxARR = Scripter.P1_ARR
+		maxDAS = Scripter.P1_DAS
+		SDF = Scripter.P1_SDF
+		useGhost = Scripter.P1_UseGhost
+		useGhostColour = Scripter.P1_UseGhostColour
+		skin = Scripter.P1_Skin
+	else:
+		playerName = Scripter.P2_Name
+		maxARR = Scripter.P2_ARR
+		maxDAS = Scripter.P2_DAS
+		SDF = Scripter.P2_SDF
+		useGhost = Scripter.P2_UseGhost
+		useGhostColour = Scripter.P2_UseGhostColour
+		skin = Scripter.P2_Skin
+		
+		
+
 func StartNewGame():
-	GenerateNewBag(true)
+	gameActive = true
 	SpawnNewPiece()
+
+func StopGame():
+	gameActive = false
+	GamePaused.emit()
+	ClearActivePiece()
+
+	
+func ResetBoard():
+	gameActive = false
+	mainGrid.clear()
+	activeGrid.clear()
+	ghostGrid.clear()
+	dangerGrid.clear()
+	holdManager.ResetHold()
+	GenerateNewBag(true)
+	
 	
 func GenerateNewBag(isNewGame):
 	if isNewGame:
@@ -196,9 +285,9 @@ func _process(delta):
 		else:
 			if maxARR == 0:
 				if movementPriority == 0:
-					MovePiece(0) #Cambiar al snap instante
+					InstaARR(0)
 				else:
-					MovePiece(1) 
+					InstaARR(1)
 			elif currentARR <= maxARR:
 				currentARR += delta * 1000
 			else:
@@ -213,7 +302,7 @@ func _process(delta):
 				currentDAS += delta * 1000
 			else:
 				if maxARR == 0: #ARR 0 is broken. It doesn't snap the piece to the extreme side of the board
-					MovePiece(0) #Will change later to "InstaMove(0)
+					InstaARR(0)
 				elif currentARR <= maxARR:
 					currentARR += delta * 1000
 				else:
@@ -224,7 +313,7 @@ func _process(delta):
 				currentDAS += delta * 1000
 			else:
 				if maxARR == 0: 
-					MovePiece(1) 
+					InstaARR(1)
 				elif currentARR <= maxARR:
 					currentARR += delta * 1000
 				else:
@@ -233,7 +322,11 @@ func _process(delta):
 	#endregion
 	
 	if isSoftDroping:
-		gravityTimer += delta * SDF
+		if SDF > 40:
+			InstaSoftDrop()
+		else:
+			gravityTimer += delta * SDF
+		
 	else:
 		gravityTimer +=  delta
 	if gravityTimer >= gravity:
@@ -263,63 +356,126 @@ func ApplyGravity():
 			currentPieceCoords.y += 1
 			if(isSoftDroping):
 				PlayAudio(sfxSoftDrop)
+			if not isLockTimerActive:
+				for block in currentPieceTiles:
+					var tmpPos = currentPieceCoords + block + Vector2i(0,1)
+					if tmpPos.y >= boardHeight or not IsCellEmpty(tmpPos):
+						isLockTimerActive = true
+						PlayAudio(sfxHitFloor)
+						break
 		else:
-			isLockTimerActive = true
+			if not isLockTimerActive:
+				isLockTimerActive = true
+				PlayAudio(sfxHitFloor)
 		DrawPiece(0, currentPieceTiles, currentPieceCoords)
 	
 func _input(event):
-	if event.is_action_pressed("P1_MV_L"):
-		if gameActive:
-			MovePiece(0)
-			movementPriority = 0
-			isMovingLeft = true
-			currentDAS = 0
-			currentARR = 0
-	if event.is_action_released("P1_MV_L"):
-		if gameActive:
-			isMovingLeft = false
-			currentDAS = 0
-			currentARR = 0
-		#;aybe reset some values, not sure if make it here or its own function
-	if event.is_action_pressed("P1_MV_R"):
-		if gameActive:
-			MovePiece(1)
-			movementPriority = 1
-			isMovingRight = true
-			currentDAS = 0
-			currentARR = 0
-	if event.is_action_released("P1_MV_R"):
-		if gameActive:
-			isMovingRight = false
-			currentDAS = 0
-			currentARR = 0
-	
-	if event.is_action_pressed("P1_CW"):
-		if gameActive:
-			RotatePiece(1)
-	if event.is_action_pressed("P1_CCW"):
-		if gameActive:
-			RotatePiece(0)
-	if event.is_action_pressed("P1_180"):
-		if gameActive:
-			RotatePiece(2)
+	if isPlayerOne:
+		if event.is_action_pressed("P1_MV_L"):
+			if gameActive:
+				MovePiece(0)
+				movementPriority = 0
+				isMovingLeft = true
+				currentDAS = 0
+				currentARR = 0
+		if event.is_action_released("P1_MV_L"):
+			if gameActive:
+				isMovingLeft = false
+				currentDAS = 0
+				currentARR = 0
+			#;aybe reset some values, not sure if make it here or its own function
+		if event.is_action_pressed("P1_MV_R"):
+			if gameActive:
+				MovePiece(1)
+				movementPriority = 1
+				isMovingRight = true
+				currentDAS = 0
+				currentARR = 0
+		if event.is_action_released("P1_MV_R"):
+			if gameActive:
+				isMovingRight = false
+				currentDAS = 0
+				currentARR = 0
 		
-	if event.is_action_pressed("P1_HD"):
-		if gameActive:
-			HardDrop()
+		if event.is_action_pressed("P1_CW"):
+			if gameActive:
+				RotatePiece(1)
+		if event.is_action_pressed("P1_CCW"):
+			if gameActive:
+				RotatePiece(0)
+		if event.is_action_pressed("P1_180"):
+			if gameActive:
+				RotatePiece(2)
+			
+		if event.is_action_pressed("P1_HD"):
+			if gameActive:
+				HardDrop()
+			
+		if event.is_action_pressed("P1_SD"):
+			if gameActive:
+				#SoftDrop()#temp
+				isSoftDroping = true
+		if event.is_action_released("P1_SD"):
+			if gameActive:
+				isSoftDroping = false
+			
+		if event.is_action_pressed("P1_HOLD"):
+			if gameActive:
+				TriggerHold()
+	else:
+		if event.is_action_pressed("P2_MV_L"):
+			if gameActive:
+				MovePiece(0)
+				movementPriority = 0
+				isMovingLeft = true
+				currentDAS = 0
+				currentARR = 0
+		if event.is_action_released("P2_MV_L"):
+			if gameActive:
+				isMovingLeft = false
+				currentDAS = 0
+				currentARR = 0
+			#;aybe reset some values, not sure if make it here or its own function
+		if event.is_action_pressed("P2_MV_R"):
+			if gameActive:
+				MovePiece(1)
+				movementPriority = 1
+				isMovingRight = true
+				currentDAS = 0
+				currentARR = 0
+		if event.is_action_released("P2_MV_R"):
+			if gameActive:
+				isMovingRight = false
+				currentDAS = 0
+				currentARR = 0
 		
-	if event.is_action_pressed("P1_SD"):
-		if gameActive:
-			#SoftDrop()#temp
-			isSoftDroping = true
-	if event.is_action_released("P1_SD"):
-		if gameActive:
-			isSoftDroping = false
-		
-	if event.is_action_pressed("P1_HOLD"):
-		if gameActive:
-			TriggerHold()
-		
+		if event.is_action_pressed("P2_CW"):
+			if gameActive:
+				RotatePiece(1)
+		if event.is_action_pressed("P2_CCW"):
+			if gameActive:
+				RotatePiece(0)
+		if event.is_action_pressed("P2_180"):
+			if gameActive:
+				RotatePiece(2)
+			
+		if event.is_action_pressed("P2_HD"):
+			if gameActive:
+				HardDrop()
+			
+		if event.is_action_pressed("P2_SD"):
+			if gameActive:
+				#SoftDrop()#temp
+				isSoftDroping = true
+		if event.is_action_released("P2_SD"):
+			if gameActive:
+				isSoftDroping = false
+			
+		if event.is_action_pressed("P2_HOLD"):
+			if gameActive:
+				TriggerHold()
+	if event.is_action_pressed("ToggleFullScreen"):
+		ReceiveAttack(10)
 #region Drawing
 func DrawPiece(grid, piece, pos):
 	var colour
@@ -457,14 +613,16 @@ func MovePiece(dir):
 		PlayAudio(sfxMove)
 		currentPieceCoords = tmpPos
 		lastActRotation = false
-	DrawPiece(0, currentPieceTiles, currentPieceCoords)
-	DrawGhost()
 	if isLockTimerActive:
 		currentLockTimer = 0
 		if currentLockRotation < maxLockRotation:
 			currentLockRotation += 1
 		else:
 			LockPiece()
+	isLockTimerActive = false
+	DrawPiece(0, currentPieceTiles, currentPieceCoords)
+	DrawGhost()
+	
 
 func RotatePiece(dir):
 	#var = currentPieceTiles
@@ -599,6 +757,37 @@ func HardDrop():
 	PlayAudio(sfxHardDrop)
 	LockPiece(true)
 
+func InstaARR(direction: int):
+	ClearActivePiece()
+	var maxMoveDistance = 0
+	while true:
+		var canMove = true
+		for block in currentPieceTiles:
+			var newPos
+			if direction == 0:
+				newPos = currentPieceCoords + block + Vector2i(maxMoveDistance -  1, 0)
+				if newPos.x < 0 or not IsCellEmpty(newPos):
+					canMove = false
+					break
+			else:
+				newPos = currentPieceCoords + block + Vector2i(maxMoveDistance + 1, 0)
+				if newPos.x >= boardWidth or not IsCellEmpty(newPos):
+					canMove = false
+					break
+		if not canMove:
+			break
+		else:
+			PlayAudio(sfxMove)
+		if direction == 0:
+			maxMoveDistance -= 1
+		else:
+			maxMoveDistance += 1
+	currentPieceCoords.x += maxMoveDistance
+	ClearActivePiece()
+	DrawPiece(0, currentPieceTiles, currentPieceCoords)
+	DrawGhost()
+
+
 func InstaSoftDrop():
 	ClearActivePiece()
 	var maxDropDistance = 0
@@ -608,6 +797,9 @@ func InstaSoftDrop():
 			var new_pos = currentPieceCoords + block + Vector2i(0, maxDropDistance + 1)
 			if new_pos.y >= boardHeight or not IsCellEmpty(new_pos):
 				can_move_down = false
+				if not isLockTimerActive:
+					isLockTimerActive = true
+					PlayAudio(sfxHitFloor)
 				break
 		if not can_move_down:
 			break
@@ -682,10 +874,47 @@ func IsFacingTwoCorners(corners) -> bool: #Used for T-Spin calculations
 
 func AttackCalculator(linesCleared: int, perfectCleared: bool = false):
 	var attack: int = 0
-	
-	#print(tSpinType)
+	var comboSound
+	Lines.emit(linesCleared)
 	if not inCombo and linesCleared > 0:
 		inCombo = true
+	elif inCombo and linesCleared > 0:
+		combo += 1
+		Combo.emit(combo)
+		match combo:
+			1:
+				comboSound = sfxCombo1
+			2:
+				comboSound = sfxCombo2
+			3:
+				comboSound = sfxCombo3
+			4:
+				comboSound = sfxCombo4
+			5:
+				comboSound = sfxCombo5
+			6:
+				comboSound = sfxCombo6
+			7:
+				comboSound = sfxCombo7
+			8:
+				comboSound = sfxCombo8
+			9:
+				comboSound = sfxCombo9
+			10:
+				comboSound = sfxCombo10
+			11:
+				comboSound = sfxCombo11
+			12:
+				comboSound = sfxCombo12
+			13:
+				comboSound = sfxCombo13
+			14:
+				comboSound = sfxCombo14
+			15:
+				comboSound = sfxCombo15
+			_:
+				comboSound = sfxCombo16
+	PlayAudio(comboSound)
 	
 	if perfectCleared == true:
 		attack += 10
@@ -693,8 +922,17 @@ func AttackCalculator(linesCleared: int, perfectCleared: bool = false):
 	
 	match linesCleared:
 		0:
+			if inCombo and combo >= 3:
+				PlayAudio(sfxComboBreak)
 			inCombo = false
 			combo = 0
+			if not pendingGarbage.is_empty():
+				var totalGarbage = 0
+				for garbage in pendingGarbage:
+					totalGarbage += garbage
+				AddGarbage(totalGarbage)
+				pendingGarbage = []
+				Garbage.emit(0)
 		1:
 			if tSpinType > 0:
 				PlayAudio(sfxClearSpin)
@@ -705,10 +943,15 @@ func AttackCalculator(linesCleared: int, perfectCleared: bool = false):
 					b2b += 1
 				if tSpinType == 2:
 					attack += 2
+				B2B.emit()
+				B2BCombo.emit(b2b)
 			else:
 				inB2B = false
 				b2b = 0
+				B2BCombo.emit(b2b)
+				B2BCombo.emit(b2b)
 				PlayAudio(sfxClearLine)
+			
 		2:
 			attack += 1
 			if tSpinType > 0:
@@ -720,9 +963,13 @@ func AttackCalculator(linesCleared: int, perfectCleared: bool = false):
 					b2b += 1
 				if tSpinType == 2:
 					attack += 3
+				B2B.emit()
+				B2BCombo.emit(b2b)
 			else:
 				inB2B = false
 				b2b = 0
+				B2BCombo.emit(b2b)
+				B2BCombo.emit(b2b)
 				PlayAudio(sfxClearLine)
 		3:
 			attack += 2
@@ -735,9 +982,13 @@ func AttackCalculator(linesCleared: int, perfectCleared: bool = false):
 					b2b += 1
 				if tSpinType == 2:
 					attack += 4
+				B2B.emit()
+				B2BCombo.emit(b2b)
 			else:
 				inB2B = false
 				b2b = 0
+				B2BCombo.emit(b2b)
+				B2BCombo.emit(b2b)
 				PlayAudio(sfxClearLine)
 		4:
 			attack += 4
@@ -748,7 +999,47 @@ func AttackCalculator(linesCleared: int, perfectCleared: bool = false):
 				attack += 1
 				b2b += 1
 				PlayAudio(sfxClearB2B)
-	Attack.emit(attack)
+				B2B.emit()
+				B2BCombo.emit(b2b)
+	while attack > 0 and not pendingGarbage.is_empty():
+		var garbage = pendingGarbage[0]
+		if garbage <= attack:
+			attack -= garbage
+			pendingGarbage.remove_at(0)
+		else:
+			pendingGarbage[0] -= attack
+			attack = 0
+	var totalGarbage = 0
+	if not pendingGarbage.is_empty():
+		for garbage in pendingGarbage:
+			totalGarbage += garbage
+	Garbage.emit(totalGarbage)
+	
+	
+	if attack > 0:
+		Attack.emit(attack)
+
+func AddGarbage(attack: int):
+	var holePos = randi() % boardWidth
+	
+	MoveLinesUp(attack)
+	
+	for i in range(attack):
+		for x in range(boardWidth):
+			if x == holePos:
+				mainGrid.erase_cell(Vector2i(x, boardHeight - i - 1))
+			else:
+				mainGrid.set_cell(Vector2i(x, boardHeight - i - 1), skin, Vector2i(9,0))
+
+func MoveLinesUp(rows: int):
+	for y in range(-19, boardHeight - rows):
+		for x in range(boardWidth):
+			var tmpBoard = mainGrid.get_cell_atlas_coords(Vector2i(x, y + rows))
+			if tmpBoard == Vector2i(-1, -1):
+				mainGrid.erase_cell(Vector2i(x, y))
+			else:
+				mainGrid.set_cell(Vector2i(x,y), skin, tmpBoard)
+		
 
 func IsCellEmpty(pos: Vector2i) -> bool:
 	var collision = false
@@ -916,3 +1207,10 @@ func SetManualPiece(piece):
 			DrawGhost()
 			DrawDanger()
 		lastActRotation = false
+		
+func ReceiveAttack(attack: int):
+	pendingGarbage.append(attack)
+	var totalGarbage = 0
+	for garbage in pendingGarbage:
+		totalGarbage += garbage
+	Garbage.emit(totalGarbage)
