@@ -22,9 +22,7 @@ func PlayerTwoDead():
 	P1_Animator.play("Boards/Win")
 	P1Points += 1
 	VerifyScore()
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+
 
 
 func TopOutAnimFinished(anim_name):	

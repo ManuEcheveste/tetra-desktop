@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://dk3v0w7q51euy"]
+[gd_scene load_steps=11 format=3 uid="uid://dk3v0w7q51euy"]
 
 [ext_resource type="FontFile" uid="uid://dhwn4eqh0rbri" path="res://Assets/Fonts/KARNIVOB.ttf" id="1_6ftam"]
 [ext_resource type="Script" path="res://Assets/Scripts/Menus/MainMenuManager.gd" id="1_gjhug"]
 [ext_resource type="FontFile" uid="uid://c0dik78i01yl8" path="res://Assets/Fonts/KARNIBLA.ttf" id="2_7aed5"]
 [ext_resource type="Texture2D" uid="uid://vvq3nfcryfj8" path="res://Assets/Sprites/BGNs/tetrio-coverart-alt.png" id="3_vkfwq"]
+[ext_resource type="PackedScene" uid="uid://cgvn5pc7hub41" path="res://Assets/Scenes/Options/ChangeControls.tscn" id="5_7cfgb"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_xlm8c"]
 font = ExtResource("1_6ftam")
@@ -44,10 +45,18 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_vkfwq")
 expand_mode = 2
-stretch_mode = 3
+stretch_mode = 6
 flip_h = true
 
-[node name="Title" type="Label" parent="."]
+[node name="MainMenu" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="MainMenu"]
 layout_mode = 1
 offset_left = 50.0
 offset_top = 100.0
@@ -56,7 +65,7 @@ offset_bottom = 217.0
 text = "Tetra Desktop"
 label_settings = SubResource("LabelSettings_xlm8c")
 
-[node name="VS-Button" type="Button" parent="."]
+[node name="VS-Button" type="Button" parent="MainMenu"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -73,7 +82,7 @@ theme = SubResource("Theme_bqhtg")
 theme_override_styles/normal = SubResource("StyleBoxFlat_r4qgp")
 text = "Play"
 
-[node name="OptionsButton" type="Button" parent="."]
+[node name="OptionsButton" type="Button" parent="MainMenu"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -90,7 +99,7 @@ theme = SubResource("Theme_bqhtg")
 disabled = true
 text = "Options"
 
-[node name="CreditsButton" type="Button" parent="."]
+[node name="CreditsButton" type="Button" parent="MainMenu"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -108,4 +117,35 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_jgqs7")
 disabled = true
 text = "Credits"
 
-[connection signal="pressed" from="VS-Button" to="." method="OnVSButtonPress"]
+[node name="Control" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Control" parent="Control/ScrollContainer/VBoxContainer" instance=ExtResource("5_7cfgb")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Control2" parent="Control/ScrollContainer/VBoxContainer" instance=ExtResource("5_7cfgb")]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[connection signal="pressed" from="MainMenu/VS-Button" to="." method="OnVSButtonPress"]

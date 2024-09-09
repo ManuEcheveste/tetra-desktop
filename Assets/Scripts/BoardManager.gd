@@ -1009,11 +1009,11 @@ func AttackCalculator(linesCleared: int, perfectCleared: bool = false):
 		else:
 			pendingGarbage[0] -= attack
 			attack = 0
-	var totalGarbage = 0
+	var garbageTotal = 0
 	if not pendingGarbage.is_empty():
 		for garbage in pendingGarbage:
-			totalGarbage += garbage
-	Garbage.emit(totalGarbage)
+			garbageTotal += garbage
+	Garbage.emit(garbageTotal)
 	
 	
 	if attack > 0:
