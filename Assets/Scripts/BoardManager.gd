@@ -2,7 +2,7 @@ extends Control
 
 @export var isPlayerOne:bool
 var gameActive: bool = true #will change later to be false default
-var isDebug = false
+var isDebug = true
 @onready var mainGrid = $MainGrid
 @onready var activeGrid = $MainGrid/ActiveGrid
 @onready var ghostGrid = $MainGrid/GhostGrid
@@ -331,7 +331,7 @@ func _process(delta):
 		gravityTimer +=  delta
 	if gravityTimer >= gravity:
 		gravityTimer = 0.0 
-		ApplyGravity()
+		#ApplyGravity()
 	
 	#region Lock Piece Timer
 	
@@ -339,7 +339,8 @@ func _process(delta):
 		if currentLockTimer < lockTimer:
 			currentLockTimer += delta
 		else:
-			LockPiece()
+			pass
+			#LockPiece()
 	#endregion
 
 func ApplyGravity():
@@ -852,12 +853,16 @@ func IsTSpin() -> int:
 					mainGrid.set_cell(checkPos, 0, Vector2i(11,0))
 				filledCorners += 1
 				
+		print (filledCorners)
 		if filledCorners >= 1:
-			if IsFacingTwoCorners(corners):
+			#if IsFacingTwoCorners(corners):
+			if filledCorners >= 3:
 				tSpinType = 2
+				print("T SPIN")
 				return tSpinType
 			else:
 				tSpinType = 1
+				print("T SPIN MINI")
 				return tSpinType
 		else:
 			tSpinType = 0
@@ -867,10 +872,17 @@ func IsFacingTwoCorners(corners) -> bool: #Used for T-Spin calculations
 	var facingCorners = 0
 	for i in range(4):
 		var checkPos = currentPieceCoords + corners[i]
-		if not IsCellEmpty(checkPos):
-			if i == 1 or i == 3: # Asumiendo que los índices 1 y 3 son los laterales de la pieza "T"
+		print(checkPos, " ", i)
+		if not IsCellEmpty(checkPos): #This is broken and i don't know how it works anymore
+			if i == 1 or i == 3: # Asumiendo que los índices 1 y 3 son los laterales de la pieza "T" (future me. i don't even know what was my logic in here)
 				facingCorners += 1
-	return facingCorners >= 2
+			#facingCorners += 1
+	print("Facing corners: ", facingCorners)
+	if facingCorners >= 2:
+		return true
+	else:
+		return false
+#I think this function was made to try and analyze each of the "T arms" (yellow circles) and see if it was "surrounded" (red and orange X's. see "tspin reference" in the references folder) 
 
 func AttackCalculator(linesCleared: int, perfectCleared: bool = false):
 	var attack: int = 0
@@ -1172,6 +1184,7 @@ func TriggerHold():
 			SetManualPiece(currentPiece)
 
 func SetManualPiece(piece):
+	tSpinType = 0
 	if gameActive:
 		currentPieceRotation = 0
 		match piece:

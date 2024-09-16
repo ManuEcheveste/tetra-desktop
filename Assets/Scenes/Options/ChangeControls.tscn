@@ -51,7 +51,7 @@ HSlider/styles/grabber_area_highlight = SubResource("StyleBoxEmpty_o0w55")
 [sub_resource type="Theme" id="Theme_pidcq"]
 SpinBox/icons/updown = null
 
-[node name="Control" type="Control"]
+[node name="ChangeControls" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -382,6 +382,26 @@ text = "INF"
 layout_mode = 2
 text = "MS"
 label_settings = SubResource("LabelSettings_at4u1")
+
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="AcceptButton" type="Button" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Accept"
+
+[node name="CancelButton" type="Button" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Cancel"
 
 [node name="Player 2" type="TabBar" parent="PanelContainer/MarginContainer/TabContainer"]
 visible = false

@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://ctnb8ngf7y6nu"]
+[gd_scene load_steps=7 format=3 uid="uid://b3nlvmyb440ce"]
 
-[ext_resource type="Script" path="res://Assets/Scripts/GameModes/40-Lines.gd" id="1_ebeyk"]
-[ext_resource type="PackedScene" uid="uid://cdmuarr6mdqy2" path="res://Prefabs/MainBoard.tscn" id="2_1gjt1"]
-[ext_resource type="AnimationLibrary" uid="uid://cadj7bbsvu750" path="res://Assets/Animations/Boards.res" id="3_4rk7c"]
-[ext_resource type="Texture2D" uid="uid://vvq3nfcryfj8" path="res://Assets/Sprites/BGNs/tetrio-coverart-alt.png" id="5_aupem"]
-[ext_resource type="PackedScene" uid="uid://bbaw65ob23fe8" path="res://Prefabs/End-Screens/40L-Results.tscn" id="6_nobwl"]
+[ext_resource type="Script" path="res://Assets/Scripts/GameModes/Classic.gd" id="1_5n5j6"]
+[ext_resource type="PackedScene" uid="uid://cdmuarr6mdqy2" path="res://Prefabs/MainBoard.tscn" id="2_3ftkq"]
+[ext_resource type="AnimationLibrary" uid="uid://cadj7bbsvu750" path="res://Assets/Animations/Boards.res" id="3_qhrjo"]
+[ext_resource type="Texture2D" uid="uid://vvq3nfcryfj8" path="res://Assets/Sprites/BGNs/tetrio-coverart-alt.png" id="5_cnisw"]
 
 [sub_resource type="Animation" id="Animation_nu1ek"]
 length = 0.001
@@ -81,7 +80,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_ebeyk")
+script = ExtResource("1_5n5j6")
 
 [node name="Boards" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -96,10 +95,13 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 6
 
-[node name="Board" parent="Boards/Player1" instance=ExtResource("2_1gjt1")]
+[node name="Board" parent="Boards/Player1" instance=ExtResource("2_3ftkq")]
 layout_mode = 1
 
 [node name="AttackLabel" parent="Boards/Player1/Board/DisplayInfo/LeftSide/Elements" index="2"]
+visible = false
+
+[node name="TimeLabel" parent="Boards/Player1/Board/DisplayInfo/LeftSide/Elements" index="3"]
 visible = false
 
 [node name="GarbageMeter" parent="Boards/Player1/Board/DisplayInfo/LeftSide" index="1"]
@@ -111,10 +113,13 @@ visible = false
 [node name="Lines" parent="Boards/Player1/Board/DisplayInfo/RightSide/Elements" index="2"]
 visible = true
 
+[node name="LinesGoal" parent="Boards/Player1/Board/DisplayInfo/RightSide/Elements/Lines/Data" index="1"]
+visible = false
+
 [node name="Animator" type="AnimationPlayer" parent="Boards/Player1"]
 libraries = {
 "": SubResource("AnimationLibrary_yrgys"),
-"Boards": ExtResource("3_4rk7c")
+"Boards": ExtResource("3_qhrjo")
 }
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -125,21 +130,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("5_aupem")
+texture = ExtResource("5_cnisw")
 expand_mode = 2
 stretch_mode = 6
 
-[node name="EndResults" parent="." instance=ExtResource("6_nobwl")]
-visible = false
-layout_mode = 1
-
-[connection signal="WonGame" from="." to="Boards/Player1/Board" method="StopGame"]
-[connection signal="WonGame" from="." to="EndResults" method="GetResults"]
 [connection signal="Attack" from="Boards/Player1/Board" to="Boards/Player1/Board/DisplayInfo" method="Attack"]
 [connection signal="Lines" from="Boards/Player1/Board" to="." method="VerifyLines"]
 [connection signal="TopedOut" from="Boards/Player1/Board" to="." method="LostTheGame"]
-[connection signal="time" from="Boards/Player1/Board/DisplayInfo" to="EndResults" method="UpdateResults"]
 [connection signal="animation_finished" from="Boards/Player1/Animator" to="." method="_on_animator_animation_finished"]
-[connection signal="AskForTime" from="EndResults" to="Boards/Player1/Board/DisplayInfo" method="SendTime"]
 
 [editable path="Boards/Player1/Board"]
