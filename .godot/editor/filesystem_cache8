@@ -1,6 +1,6 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1726469578
-export_presets.cfg::TextFile::-1::1725584026::0::1::::<><>::
+::res://::1727145159
+export_presets.cfg::TextFile::-1::1726470056::0::1::::<><>::
 icon.svg::CompressedTexture2D::1875632096193073955::1724644546::1725577807::1::::<><>::
 README.md::TextFile::-1::1725087846::0::1::::<><>::
 ::res://Assets/::1725577807
@@ -55,30 +55,30 @@ KARNIVOR.ttf::FontFile::5730805769316734693::1725173996::1725577807::1::::<><>::
 Prom.ttf::FontFile::7368214461732993805::1724608582::1725577807::1::::<><>::
 Spectrashell.otf::FontFile::931088154816357117::1725172890::1725577807::1::::<><>::
 zrnic rg.otf::FontFile::8301241306418857780::1725172894::1725577807::1::::<><>::
-::res://Assets/Scenes/::1726469554
-MainMenu.tscn::PackedScene::7920273971984547456::1726469554::0::1::::<><>::uid://dhwn4eqh0rbri::::res://Assets/Fonts/KARNIVOB.ttf<>res://Assets/Scripts/Menus/MainMenuManager.gd<>uid://c0dik78i01yl8::::res://Assets/Fonts/KARNIBLA.ttf<>uid://vvq3nfcryfj8::::res://Assets/Sprites/BGNs/tetrio-coverart-alt.png<>uid://cgvn5pc7hub41::::res://Assets/Scenes/Options/ChangeControls.tscn<>uid://nja5ecqggsmn::::res://Assets/Fonts/Spectrashell.otf
-::res://Assets/Scenes/GameModes/::1726469554
-40-Lines.tscn::PackedScene::6133386647846520362::1726469504::0::1::::<><>::res://Assets/Scripts/GameModes/40-Lines.gd<>uid://cdmuarr6mdqy2::::res://Prefabs/MainBoard.tscn<>uid://cadj7bbsvu750::::res://Assets/Animations/Boards.res<>uid://vvq3nfcryfj8::::res://Assets/Sprites/BGNs/tetrio-coverart-alt.png<>uid://bbaw65ob23fe8::::res://Prefabs/End-Screens/40L-Results.tscn
-Classic.tscn::PackedScene::4379251272394084484::1726469505::0::1::::<><>::res://Assets/Scripts/GameModes/Classic.gd<>uid://cdmuarr6mdqy2::::res://Prefabs/MainBoard.tscn<>uid://cadj7bbsvu750::::res://Assets/Animations/Boards.res<>uid://vvq3nfcryfj8::::res://Assets/Sprites/BGNs/tetrio-coverart-alt.png
-VS-Game.tscn::PackedScene::1396590759284005488::1726469554::0::1::::<><>::res://Assets/Scripts/GameModes/VS-Manager.gd<>uid://cdmuarr6mdqy2::::res://Prefabs/MainBoard.tscn<>uid://cadj7bbsvu750::::res://Assets/Animations/Boards.res<>uid://vvq3nfcryfj8::::res://Assets/Sprites/BGNs/tetrio-coverart-alt.png
-::res://Assets/Scenes/Options/::1726468158
-ChangeControls.tscn::PackedScene::5238170049176699784::1726468158::0::1::::<><>::uid://c2r5tr7fax7rw::::res://Assets/Fonts/KARNIVOL.ttf<>uid://cnwbsfadh84a0::::res://Assets/Fonts/KARNIVOR.ttf<>uid://dqjgh4uqwylv5::::res://Assets/Fonts/zrnic rg.otf<>uid://cs3saea5ku0gq::::res://Assets/Sprites/UI/squareBlue.png
-::res://Assets/Scripts/::1726469412
-AudioPlayer.gd::GDScript::-1::1725582579::0::1::::<>AudioStreamPlayer<>::
-BoardManager.gd::GDScript::-1::1726469412::0::1::::<>Control<>::
-DisplayInfoManager.gd::GDScript::-1::1725582327::0::1::::<>Control<>::
-EndScreen.gd::GDScript::-1::1725583370::0::1::::<>Control<>::
-HoldManager.gd::GDScript::-1::1725258304::0::1::::<>TileMapLayer<>::
-PlayerConfig.gd::GDScript::-1::1725760443::0::1::::PlayerConfig<>Resource<>::
-QueueManager.gd::GDScript::-1::1725099094::0::1::::<>TileMapLayer<>::
-Scripter.gd::GDScript::-1::1725778039::0::1::::ScripterData<>Node<>::
-::res://Assets/Scripts/GameModes/::1726454967
-40-Lines.gd::GDScript::-1::1725583989::0::1::::<>Control<>::
-Classic.gd::GDScript::-1::1726454967::0::1::::<>Control<>::
-VS-Manager.gd::GDScript::-1::1725760738::0::1::::<>Control<>::
-::res://Assets/Scripts/Menus/::1726455136
-MainMenuManager.gd::GDScript::-1::1726455136::0::1::::<>Control<>::
-::res://Assets/Sprites/::1725775878
+::res://Assets/Scenes/::1726538746
+MainMenu.tscn::PackedScene::7920273971984547456::1726538746::0::1::::<><>::uid://dhwn4eqh0rbri::::res://Assets/Fonts/KARNIVOB.ttf<>res://Assets/Scripts/Menus/MainMenuManager.gd<>uid://c0dik78i01yl8::::res://Assets/Fonts/KARNIBLA.ttf<>uid://vvq3nfcryfj8::::res://Assets/Sprites/BGNs/tetrio-coverart-alt.png<>uid://cgvn5pc7hub41::::res://Assets/Scenes/Options/ChangeControls.tscn<>uid://nja5ecqggsmn::::res://Assets/Fonts/Spectrashell.otf
+::res://Assets/Scenes/GameModes/::1726470035
+40-Lines.tscn::PackedScene::6133386647846520362::1726470034::0::1::::<><>::res://Assets/Scripts/GameModes/40-Lines.gd<>uid://cdmuarr6mdqy2::::res://Prefabs/MainBoard.tscn<>uid://cadj7bbsvu750::::res://Assets/Animations/Boards.res<>uid://vvq3nfcryfj8::::res://Assets/Sprites/BGNs/tetrio-coverart-alt.png<>uid://bbaw65ob23fe8::::res://Prefabs/End-Screens/40L-Results.tscn
+Classic.tscn::PackedScene::4379251272394084484::1726470035::0::1::::<><>::res://Assets/Scripts/GameModes/Classic.gd<>uid://cdmuarr6mdqy2::::res://Prefabs/MainBoard.tscn<>uid://cadj7bbsvu750::::res://Assets/Animations/Boards.res<>uid://vvq3nfcryfj8::::res://Assets/Sprites/BGNs/tetrio-coverart-alt.png
+VS-Game.tscn::PackedScene::1396590759284005488::1726470033::0::1::::<><>::res://Assets/Scripts/GameModes/VS-Manager.gd<>uid://cdmuarr6mdqy2::::res://Prefabs/MainBoard.tscn<>uid://cadj7bbsvu750::::res://Assets/Animations/Boards.res<>uid://vvq3nfcryfj8::::res://Assets/Sprites/BGNs/tetrio-coverart-alt.png
+::res://Assets/Scenes/Options/::1726470034
+ChangeControls.tscn::PackedScene::5238170049176699784::1726470034::0::1::::<><>::uid://c2r5tr7fax7rw::::res://Assets/Fonts/KARNIVOL.ttf<>uid://cnwbsfadh84a0::::res://Assets/Fonts/KARNIVOR.ttf<>uid://dqjgh4uqwylv5::::res://Assets/Fonts/zrnic rg.otf<>uid://cs3saea5ku0gq::::res://Assets/Sprites/UI/squareBlue.png
+::res://Assets/Scripts/::1726538746
+AudioPlayer.gd::GDScript::-1::1726469981::0::1::::<>AudioStreamPlayer<>::
+BoardManager.gd::GDScript::-1::1726470031::0::1::::<>Control<>::
+DisplayInfoManager.gd::GDScript::-1::1726469982::0::1::::<>Control<>::
+EndScreen.gd::GDScript::-1::1726469982::0::1::::<>Control<>::
+HoldManager.gd::GDScript::-1::1726469982::0::1::::<>TileMapLayer<>::
+PlayerConfig.gd::GDScript::-1::1726469982::0::1::::PlayerConfig<>Resource<>::
+QueueManager.gd::GDScript::-1::1726469982::0::1::::<>TileMapLayer<>::
+Scripter.gd::GDScript::-1::1726538746::0::1::::ScripterData<>Node<>::
+::res://Assets/Scripts/GameModes/::1726469982
+40-Lines.gd::GDScript::-1::1726469981::0::1::::<>Control<>::
+Classic.gd::GDScript::-1::1726469982::0::1::::<>Control<>::
+VS-Manager.gd::GDScript::-1::1726469982::0::1::::<>Control<>::
+::res://Assets/Scripts/Menus/::1726469982
+MainMenuManager.gd::GDScript::-1::1726469982::0::1::::<>Control<>::
+::res://Assets/Sprites/::1726469775
 Board.svg::CompressedTexture2D::8831840431374862656::1724628648::1725577807::1::::<><>::
 HOLD.png::CompressedTexture2D::9070295155967239211::1724612778::1725577807::1::::<><>::
 me when no bugs.png::CompressedTexture2D::2079759976829488195::1725177692::1725577807::1::::<><>::
@@ -88,25 +88,25 @@ S Q U A R E.png::CompressedTexture2D::8572551359801142341::1724581366::172557780
 tetrio-coverart-alt.png::CompressedTexture2D::1518339813989647799::1725181620::1725577808::1::::<><>::
 ::res://Assets/Sprites/Skins/::1725577807
 GemygemSkin.png::CompressedTexture2D::6405085189531977103::1724576212::1725577807::1::::<><>::
-::res://Assets/Sprites/UI/::1725775881
-squareBlue.png::CompressedTexture2D::6095136247324896960::1725775881::1725775881::1::::<><>::
+::res://Assets/Sprites/UI/::1726469974
+squareBlue.png::CompressedTexture2D::6095136247324896960::1726469775::1726469974::1::::<><>::
 ::res://Exports/::1725584112
-::res://Exports/HTML/::1725584127
-index.apple-touch-icon.png::CompressedTexture2D::3604229522866633847::1725584025::1725584127::1::::<><>::
-index.icon.png::CompressedTexture2D::932509203151675707::1725584025::1725584127::1::::<><>::
-index.png::CompressedTexture2D::72345712372082643::1725584025::1725584127::1::::<><>::
+::res://Exports/HTML/::1726524525
+index.apple-touch-icon.png::CompressedTexture2D::3604229522866633847::1726470056::1726524524::1::::<><>::
+index.icon.png::CompressedTexture2D::932509203151675707::1726470056::1726524524::1::::<><>::
+index.png::CompressedTexture2D::72345712372082643::1726470056::1726524524::1::::<><>::
 ::res://Exports/Linux 32/::1725577775
-::res://Prefabs/::1726469412
+::res://Prefabs/::1726470033
 AudioPlayer.tscn::PackedScene::802842931440825494::1725584137::0::1::::<><>::res://Assets/Scripts/AudioPlayer.gd
-MainBoard.tscn::PackedScene::5009395691787644803::1726469412::0::1::::<><>::uid://dueuwyx80a3sb::::res://Assets/Sprites/S Q U A R E.png<>uid://d0e0onwni5qdf::::res://Themes/Tetraminos.tres<>res://Assets/Scripts/BoardManager.gd<>res://Assets/Scripts/HoldManager.gd<>res://Assets/Scripts/QueueManager.gd<>res://Assets/Scripts/DisplayInfoManager.gd<>uid://c8etue40f6gr1::::res://Themes/SmallNumbers.tres<>uid://61le6g480owo::::res://Themes/BigNumbers.tres<>uid://cnwbsfadh84a0::::res://Assets/Fonts/KARNIVOR.ttf<>uid://d2hyo3b2mesr8::::res://Assets/Sprites/HOLD.png<>uid://c2r5tr7fax7rw::::res://Assets/Fonts/KARNIVOL.ttf<>uid://c6bb04nnk8br1::::res://Assets/Sprites/QUEUE.png
-::res://Prefabs/End-Screens/::1726468158
-40L-Results.tscn::PackedScene::2458002258193436525::1726468158::0::1::::<><>::res://Assets/Scripts/EndScreen.gd<>uid://61le6g480owo::::res://Themes/BigNumbers.tres<>uid://c8etue40f6gr1::::res://Themes/SmallNumbers.tres<>uid://c0dik78i01yl8::::res://Assets/Fonts/KARNIBLA.ttf
-::res://References/::1726469168
+MainBoard.tscn::PackedScene::5009395691787644803::1726470033::0::1::::<><>::uid://dueuwyx80a3sb::::res://Assets/Sprites/S Q U A R E.png<>uid://d0e0onwni5qdf::::res://Themes/Tetraminos.tres<>res://Assets/Scripts/BoardManager.gd<>res://Assets/Scripts/HoldManager.gd<>res://Assets/Scripts/QueueManager.gd<>res://Assets/Scripts/DisplayInfoManager.gd<>uid://c8etue40f6gr1::::res://Themes/SmallNumbers.tres<>uid://61le6g480owo::::res://Themes/BigNumbers.tres<>uid://cnwbsfadh84a0::::res://Assets/Fonts/KARNIVOR.ttf<>uid://d2hyo3b2mesr8::::res://Assets/Sprites/HOLD.png<>uid://c2r5tr7fax7rw::::res://Assets/Fonts/KARNIVOL.ttf<>uid://c6bb04nnk8br1::::res://Assets/Sprites/QUEUE.png
+::res://Prefabs/End-Screens/::1726470034
+40L-Results.tscn::PackedScene::2458002258193436525::1726470034::0::1::::<><>::res://Assets/Scripts/EndScreen.gd<>uid://61le6g480owo::::res://Themes/BigNumbers.tres<>uid://c8etue40f6gr1::::res://Themes/SmallNumbers.tres<>uid://c0dik78i01yl8::::res://Assets/Fonts/KARNIBLA.ttf
+::res://References/::1726469974
 2020-05-30_02-07-18.png::CompressedTexture2D::2844323655034455114::1725097284::1725577807::1::::<><>::
 das-issue.png::CompressedTexture2D::172467716497991382::1725097040::1725577807::1::::<><>::
 tetrio.png::CompressedTexture2D::1614956654628116341::1725135752::1725577807::1::::<><>::
-tspin reference.png::CompressedTexture2D::3909055608116108953::1726469167::1726469168::1::::<><>::
-::res://Themes/::1726448043
+tspin reference.png::CompressedTexture2D::3909055608116108953::1726469775::1726469974::1::::<><>::
+::res://Themes/::1726538746
 BigNumbers.tres::Theme::2230204643336015658::1725174150::0::1::::<><>::uid://dqjgh4uqwylv5::::res://Assets/Fonts/zrnic rg.otf
 SmallNumbers.tres::Theme::7098520313234692508::1725174150::0::1::::<><>::uid://dqjgh4uqwylv5::::res://Assets/Fonts/zrnic rg.otf
-Tetraminos.tres::TileSet::8923784296371979963::1726448043::0::1::::<><>::uid://cxiw211iuay8n::::res://Assets/GemygemSkin.png
+Tetraminos.tres::TileSet::8923784296371979963::1726538746::0::1::::<><>::uid://cxiw211iuay8n::::res://Assets/GemygemSkin.png

@@ -134,7 +134,6 @@ texture = ExtResource("5_cnisw")
 expand_mode = 2
 stretch_mode = 6
 
-[connection signal="Attack" from="Boards/Player1/Board" to="Boards/Player1/Board/DisplayInfo" method="Attack"]
 [connection signal="Lines" from="Boards/Player1/Board" to="." method="VerifyLines"]
 [connection signal="TopedOut" from="Boards/Player1/Board" to="." method="LostTheGame"]
 [connection signal="animation_finished" from="Boards/Player1/Animator" to="." method="_on_animator_animation_finished"]

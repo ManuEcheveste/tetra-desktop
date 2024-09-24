@@ -1,9 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://cgvn5pc7hub41"]
+[gd_scene load_steps=19 format=3 uid="uid://cgvn5pc7hub41"]
 
 [ext_resource type="FontFile" uid="uid://c2r5tr7fax7rw" path="res://Assets/Fonts/KARNIVOL.ttf" id="1_1njrs"]
+[ext_resource type="Script" path="res://Assets/Scripts/Menus/ControlsManager.gd" id="1_kytr2"]
 [ext_resource type="FontFile" uid="uid://cnwbsfadh84a0" path="res://Assets/Fonts/KARNIVOR.ttf" id="2_3cijl"]
 [ext_resource type="FontFile" uid="uid://dqjgh4uqwylv5" path="res://Assets/Fonts/zrnic rg.otf" id="3_e5t27"]
 [ext_resource type="Texture2D" uid="uid://cs3saea5ku0gq" path="res://Assets/Sprites/UI/squareBlue.png" id="4_b2pmo"]
+[ext_resource type="FontFile" uid="uid://c0dik78i01yl8" path="res://Assets/Fonts/KARNIBLA.ttf" id="4_q4doj"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gw2tc"]
 
@@ -58,6 +60,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_kytr2")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -280,12 +283,24 @@ theme_override_fonts/font = ExtResource("3_e5t27")
 theme_override_font_sizes/font_size = 40
 text = "SPACE"
 
-[node name="Handling" type="Label" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
+alignment = 1
+
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+
+[node name="Handling" type="Label" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 6
 size_flags_vertical = 0
 text = "Handling"
 label_settings = SubResource("LabelSettings_21ebs")
+
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_q4doj")
+text = "RESET"
 
 [node name="ARR" type="HBoxContainer" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2

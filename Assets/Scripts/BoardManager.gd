@@ -2,7 +2,7 @@ extends Control
 
 @export var isPlayerOne:bool
 var gameActive: bool = true #will change later to be false default
-var isDebug = true
+var isDebug = false
 @onready var mainGrid = $MainGrid
 @onready var activeGrid = $MainGrid/ActiveGrid
 @onready var ghostGrid = $MainGrid/GhostGrid
@@ -331,7 +331,7 @@ func _process(delta):
 		gravityTimer +=  delta
 	if gravityTimer >= gravity:
 		gravityTimer = 0.0 
-		#ApplyGravity()
+		ApplyGravity()
 	
 	#region Lock Piece Timer
 	
@@ -340,7 +340,7 @@ func _process(delta):
 			currentLockTimer += delta
 		else:
 			pass
-			#LockPiece()
+			LockPiece()
 	#endregion
 
 func ApplyGravity():

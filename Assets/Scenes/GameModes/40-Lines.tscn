@@ -135,7 +135,6 @@ layout_mode = 1
 
 [connection signal="WonGame" from="." to="Boards/Player1/Board" method="StopGame"]
 [connection signal="WonGame" from="." to="EndResults" method="GetResults"]
-[connection signal="Attack" from="Boards/Player1/Board" to="Boards/Player1/Board/DisplayInfo" method="Attack"]
 [connection signal="Lines" from="Boards/Player1/Board" to="." method="VerifyLines"]
 [connection signal="TopedOut" from="Boards/Player1/Board" to="." method="LostTheGame"]
 [connection signal="time" from="Boards/Player1/Board/DisplayInfo" to="EndResults" method="UpdateResults"]

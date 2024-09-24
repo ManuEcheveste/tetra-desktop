@@ -130,11 +130,9 @@ texture = ExtResource("5_sqpe2")
 expand_mode = 2
 stretch_mode = 6
 
-[connection signal="Attack" from="Boards/Player1/Board" to="Boards/Player1/Board/DisplayInfo" method="Attack"]
 [connection signal="Attack" from="Boards/Player1/Board" to="Boards/Player2/Board" method="ReceiveAttack"]
 [connection signal="TopedOut" from="Boards/Player1/Board" to="." method="PlayerOneDead"]
 [connection signal="TopedOut" from="Boards/Player1/Board" to="Boards/Player2/Board" method="StopGame"]
 [connection signal="Attack" from="Boards/Player2/Board" to="Boards/Player1/Board" method="ReceiveAttack"]
-[connection signal="Attack" from="Boards/Player2/Board" to="Boards/Player2/Board/DisplayInfo" method="Attack"]
 [connection signal="TopedOut" from="Boards/Player2/Board" to="." method="PlayerTwoDead"]
 [connection signal="TopedOut" from="Boards/Player2/Board" to="Boards/Player1/Board" method="StopGame"]

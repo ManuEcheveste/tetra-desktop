@@ -1,0 +1,51 @@
+[gd_resource type="Resource" script_class="PlayerConfig" load_steps=10 format=3 uid="uid://blq5ho585pam"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/PlayerConfig.gd" id="1_kotq5"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_i5ltc"]
+device = -1
+physical_keycode = 65
+unicode = 97
+
+[sub_resource type="InputEventKey" id="InputEventKey_2ihvx"]
+device = -1
+physical_keycode = 90
+unicode = 122
+
+[sub_resource type="InputEventKey" id="InputEventKey_orbfs"]
+device = -1
+physical_keycode = 88
+unicode = 120
+
+[sub_resource type="InputEventKey" id="InputEventKey_nnvm3"]
+device = -1
+physical_keycode = 32
+unicode = 32
+
+[sub_resource type="InputEventKey" id="InputEventKey_o7evk"]
+device = -1
+physical_keycode = 4194325
+
+[sub_resource type="InputEventKey" id="InputEventKey_vlum8"]
+device = -1
+physical_keycode = 4194319
+
+[sub_resource type="InputEventKey" id="InputEventKey_rdkcl"]
+device = -1
+physical_keycode = 4194321
+
+[sub_resource type="InputEventKey" id="InputEventKey_sl84e"]
+device = -1
+physical_keycode = 4194322
+
+[resource]
+script = ExtResource("1_kotq5")
+actionEvents = {}
+Default_P1_MV_L = SubResource("InputEventKey_vlum8")
+Default_P1_MV_R = SubResource("InputEventKey_rdkcl")
+Default_P1_HD = SubResource("InputEventKey_nnvm3")
+Default_P1_SD = SubResource("InputEventKey_sl84e")
+Default_P1_CW = SubResource("InputEventKey_orbfs")
+Default_P1_CCW = SubResource("InputEventKey_2ihvx")
+Default_P1_180 = SubResource("InputEventKey_i5ltc")
+Default_P1_HOLD = SubResource("InputEventKey_o7evk")

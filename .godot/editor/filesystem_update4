@@ -1,0 +1,5 @@
+res://Assets/Scenes/Options/ChangeControls.tscn
+res://Themes/Tetraminos.tres
+res://Assets/Scripts/Menus/ControlsManager.gd
+res://Assets/Scripts/PlayerConfig.gd
+res://Prefabs/DefaultKeybinds.tres
