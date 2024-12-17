@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Tetra Desktop")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4cf611b08c87e87f792d3bc9033fd75749bd63d2")]
 [assembly: System.Reflection.AssemblyProductAttribute("Tetra Desktop")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Tetra Desktop")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,5 +1,9 @@
-res://Assets/Scenes/Options/ChangeControls.tscn
+res://Prefabs/MainBoard.tscn
 res://Themes/Tetraminos.tres
-res://Assets/Scripts/Menus/ControlsManager.gd
-res://Assets/Scripts/PlayerConfig.gd
 res://Prefabs/DefaultKeybinds.tres
+res://Assets/Scenes/GameModes/VS-Game.tscn
+res://Assets/Scenes/MainMenu.tscn
+res://Assets/Scenes/GameModes/40-Lines.tscn
+res://Prefabs/End-Screens/40L-Results.tscn
+res://Assets/Scenes/Options/ChangeControls.tscn
+res://Assets/Scenes/GameModes/Classic.tscn
