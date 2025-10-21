@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://ctnb8ngf7y6nu"]
+[gd_scene load_steps=9 format=3 uid="uid://ctnb8ngf7y6nu"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/GameModes/40-Lines.gd" id="1_ebeyk"]
 [ext_resource type="PackedScene" uid="uid://cdmuarr6mdqy2" path="res://Prefabs/MainBoard.tscn" id="2_1gjt1"]
 [ext_resource type="AnimationLibrary" uid="uid://cadj7bbsvu750" path="res://Assets/Animations/Boards.res" id="3_4rk7c"]
+[ext_resource type="FontFile" uid="uid://nja5ecqggsmn" path="res://Assets/Fonts/Spectrashell.otf" id="4_5bqcy"]
 [ext_resource type="Texture2D" uid="uid://vvq3nfcryfj8" path="res://Assets/Sprites/BGNs/tetrio-coverart-alt.png" id="5_aupem"]
 [ext_resource type="PackedScene" uid="uid://bbaw65ob23fe8" path="res://Prefabs/End-Screens/40L-Results.tscn" id="6_nobwl"]
 
@@ -117,6 +118,19 @@ libraries = {
 "Boards": ExtResource("3_4rk7c")
 }
 
+[node name="Label2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -49.0
+offset_right = 307.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("4_5bqcy")
+theme_override_font_sizes/font_size = 30
+text = "v0.0.2"
+vertical_alignment = 2
+
 [node name="TextureRect" type="TextureRect" parent="."]
 z_index = -100
 layout_mode = 1
@@ -128,6 +142,24 @@ grow_vertical = 2
 texture = ExtResource("5_aupem")
 expand_mode = 2
 stretch_mode = 6
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -307.0
+offset_top = -49.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("4_5bqcy")
+theme_override_font_sizes/font_size = 30
+text = "ALL ASSETS ARE PLACEHOLDERS.
+THEY WILL BE CHANGED IN THE FUTURE"
+horizontal_alignment = 2
+vertical_alignment = 2
 
 [node name="EndResults" parent="." instance=ExtResource("6_nobwl")]
 visible = false
