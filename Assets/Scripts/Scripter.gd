@@ -12,7 +12,7 @@ var P1_UseGhostColour: bool = true
 var P2_Name: String = "Kei"
 var P2_ARR: int = 0 #Automatic Repeat Rate
 var P2_DAS: int = 140 #Delayed Autoshift
-var P2_SDF: int = 41 #Soft Drop Factor
+var P2_SDF: int = 40 #Soft Drop Factor
 var P2_Skin: int
 var P2_UseGhost: bool = true
 var P2_UseGhostColour: bool = true
