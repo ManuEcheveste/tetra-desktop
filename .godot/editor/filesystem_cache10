@@ -1,8 +1,15 @@
 63f7b34db8d8cdea90c76aacccf841ec
+<<<<<<< HEAD
 ::res://::1761071070
 export_presets.cfg::TextFile::-1::1760907178::0::1::::<><><>0<>0<><>::
 icon.svg::CompressedTexture2D::1875632096193073955::1760907178::1761022044::1::::<><><>0<>0<>50e5c1b012dcf97282263358fcbb2be4<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
 README.md::TextFile::-1::1761031778::0::1::::<><><>0<>0<><>::
+=======
+::res://::1761031486
+export_presets.cfg::TextFile::-1::1760907178::0::1::::<><><>0<>0<><>::
+icon.svg::CompressedTexture2D::1875632096193073955::1760907178::1761022044::1::::<><><>0<>0<>50e5c1b012dcf97282263358fcbb2be4<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
+README.md::TextFile::-1::1760907178::0::1::::<><><>0<>0<><>::
+>>>>>>> main
 ::res://Assets/::1761022045
 GemygemSkin.png::CompressedTexture2D::6405085189531977103::1760907180::1761022045::1::::<><><>0<>0<>5c0334ee3ac48ed323bf1bd2e2356d0f<>res://.godot/imported/GemygemSkin.png-28319bc8375b24595070566594d29869.ctex::
 ::res://Assets/Animations/::1760907181
@@ -63,6 +70,7 @@ Classic.tscn::PackedScene::4379251272394084484::1761031318::0::1::::<><><>0<>0<>
 VS-Game.tscn::PackedScene::1396590759284005488::1761031316::0::1::::<><><>0<>0<><>::res://Assets/Scripts/GameModes/VS-Manager.gd<>uid://cdmuarr6mdqy2::::res://Prefabs/MainBoard.tscn<>uid://cadj7bbsvu750::::res://Assets/Animations/Boards.res<>uid://vvq3nfcryfj8::::res://Assets/Sprites/BGNs/tetrio-coverart-alt.png
 ::res://Assets/Scenes/Options/::1761031317
 ChangeControls.tscn::PackedScene::5238170049176699784::1761031317::0::1::::<><><>0<>0<><>::uid://c2r5tr7fax7rw::::res://Assets/Fonts/KARNIVOL.ttf<>res://Assets/Scripts/Menus/ControlsManager.gd<>uid://cnwbsfadh84a0::::res://Assets/Fonts/KARNIVOR.ttf<>uid://dqjgh4uqwylv5::::res://Assets/Fonts/zrnic rg.otf<>uid://cs3saea5ku0gq::::res://Assets/Sprites/UI/squareBlue.png<>uid://c0dik78i01yl8::::res://Assets/Fonts/KARNIBLA.ttf
+<<<<<<< HEAD
 ::res://Assets/Scripts/::1761031777
 AudioPlayer.gd::GDScript::3481308033486127456::1760907180::0::1::::<>AudioStreamPlayer<><>0<>0<><>::
 BoardManager.gd::GDScript::7508372584861271717::1760907180::0::1::::<>Control<><>0<>0<><>::
@@ -79,6 +87,24 @@ VS-Manager.gd::GDScript::944540279906685723::1760907180::0::1::::<>Control<><>0<
 ::res://Assets/Scripts/Menus/::1761031777
 ControlsManager.gd::GDScript::3694729772110835806::1760907180::0::1::::<>Control<><>0<>0<><>::
 MainMenuManager.gd::GDScript::7096848716924885763::1760907180::0::1::::<>Control<><>0<>0<><>::
+=======
+::res://Assets/Scripts/::1761031384
+AudioPlayer.gd::GDScript::8897585552443980997::1760907180::0::1::::<>AudioStreamPlayer<><>0<>0<><>::
+BoardManager.gd::GDScript::4152307839247222092::1760907180::0::1::::<>Control<><>0<>0<><>::
+DisplayInfoManager.gd::GDScript::389261261837346443::1760907180::0::1::::<>Control<><>0<>0<><>::
+EndScreen.gd::GDScript::2338225919789272546::1760907180::0::1::::<>Control<><>0<>0<><>::
+HoldManager.gd::GDScript::5442508547154251443::1760907180::0::1::::<>TileMapLayer<><>0<>0<><>::
+PlayerConfig.gd::GDScript::7310115262983531673::1760907180::0::1::::PlayerConfig<>Resource<><>0<>0<><>::
+QueueManager.gd::GDScript::6358840884935871579::1760907180::0::1::::<>TileMapLayer<><>0<>0<><>::
+Scripter.gd::GDScript::3752492724857152476::1760907180::0::1::::ScripterData<>Node<><>0<>0<><>::
+::res://Assets/Scripts/GameModes/::1761031383
+40-Lines.gd::GDScript::1716584050304422697::1760907180::0::1::::<>Control<><>0<>0<><>::
+Classic.gd::GDScript::8911335883461851661::1760907180::0::1::::<>Control<><>0<>0<><>::
+VS-Manager.gd::GDScript::2116968609174669025::1760907180::0::1::::<>Control<><>0<>0<><>::
+::res://Assets/Scripts/Menus/::1761031383
+ControlsManager.gd::GDScript::2869384987586159895::1760907180::0::1::::<>Control<><>0<>0<><>::
+MainMenuManager.gd::GDScript::5160285768103250029::1760907180::0::1::::<>Control<><>0<>0<><>::
+>>>>>>> main
 ::res://Assets/Sprites/::1761022045
 Board.svg::CompressedTexture2D::8831840431374862656::1760907180::1761022044::1::::<><><>0<>0<>ab78cc8ee95ad7d66772b8a0da345fe4<>res://.godot/imported/Board.svg-beab1bc5dca0d7edfe066c271ab9814f.ctex::
 HOLD.png::CompressedTexture2D::9070295155967239211::1760907180::1761022044::1::::<><><>0<>0<>f6d7f78ca4abd2a2ae23730390f5e43d<>res://.godot/imported/HOLD.png-56e03a1813c47b76772ece5fef85c477.ctex::

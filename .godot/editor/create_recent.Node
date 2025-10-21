@@ -1,14 +1,21 @@
+<<<<<<< HEAD
 Control
 Button
 HBoxContainer
 TabContainer
+=======
+>>>>>>> main
 VBoxContainer
 ScrollContainer
+Control
+Button
 SpinBox
 MarginContainer
 LineEdit
 Label
+HBoxContainer
 HSlider
 TabBar
+TabContainer
 PopupMenu
 OptionButton
