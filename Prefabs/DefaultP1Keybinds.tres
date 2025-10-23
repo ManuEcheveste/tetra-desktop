@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="PlayerConfig" load_steps=10 format=3 uid="uid://blq5ho585pam"]
 
-[ext_resource type="Script" path="res://Assets/Scripts/PlayerConfig.gd" id="1_kotq5"]
+[ext_resource type="Script" uid="uid://nboj46t014x8" path="res://Assets/Scripts/PlayerConfig.gd" id="1_sn5gu"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_i5ltc"]
 device = -1
@@ -39,8 +39,7 @@ device = -1
 physical_keycode = 4194322
 
 [resource]
-script = ExtResource("1_kotq5")
-actionEvents = {}
+script = ExtResource("1_sn5gu")
 Default_P1_MV_L = SubResource("InputEventKey_vlum8")
 Default_P1_MV_R = SubResource("InputEventKey_rdkcl")
 Default_P1_HD = SubResource("InputEventKey_nnvm3")

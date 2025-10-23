@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://dk3v0w7q51euy"]
 
 [ext_resource type="FontFile" uid="uid://dhwn4eqh0rbri" path="res://Assets/Fonts/KARNIVOB.ttf" id="1_6ftam"]
-[ext_resource type="Script" path="res://Assets/Scripts/Menus/MainMenuManager.gd" id="1_gjhug"]
+[ext_resource type="Script" uid="uid://c8d1cddnt5dst" path="res://Assets/Scripts/Menus/MainMenuManager.gd" id="1_gjhug"]
 [ext_resource type="FontFile" uid="uid://c0dik78i01yl8" path="res://Assets/Fonts/KARNIBLA.ttf" id="2_7aed5"]
 [ext_resource type="Texture2D" uid="uid://vvq3nfcryfj8" path="res://Assets/Sprites/BGNs/tetrio-coverart-alt.png" id="3_vkfwq"]
 [ext_resource type="PackedScene" uid="uid://cgvn5pc7hub41" path="res://Assets/Scenes/Options/ChangeControls.tscn" id="5_7cfgb"]
@@ -274,4 +274,5 @@ vertical_alignment = 2
 [connection signal="pressed" from="PlayMenu/VBoxContainer/SprintButton" to="." method="GoTo40Lines"]
 [connection signal="pressed" from="PlayMenu/VBoxContainer/ClassicButton" to="." method="GoToClassic"]
 [connection signal="pressed" from="PlayMenu/VBoxContainer/BackButton" to="." method="BackPlay"]
+[connection signal="pressed" from="OptionsMenu/VBoxContainer/ControlsButton" to="." method="ActivateControlsMenu"]
 [connection signal="pressed" from="OptionsMenu/VBoxContainer/BackButton" to="." method="BackOptions"]

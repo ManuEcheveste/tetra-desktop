@@ -2,7 +2,7 @@ extends Control
 @onready var mainMenu = $MainMenu
 @onready var playMenu = $PlayMenu
 @onready var optionsMenu = $OptionsMenu
-
+@onready var controlsMenu = $ChangeControls
 
 
 
@@ -15,7 +15,10 @@ func ActivateOptionsMenu():
 	mainMenu.visible = false
 	optionsMenu.visible = true
 
-
+func ActivateControlsMenu():
+	optionsMenu.visible = false
+	controlsMenu.visible = true
+	
 
 func GoToVS():
 	get_tree().change_scene_to_file("res://Assets/Scenes/GameModes/VS-Game.tscn")

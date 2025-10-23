@@ -17,12 +17,23 @@ var P2_Skin: int
 var P2_UseGhost: bool = true
 var P2_UseGhostColour: bool = true
 
+var action_name : String = "P2_HOLD"
 func _ready():
 	var config = PlayerConfig.new()
 	#config.SetDefaultSettings()
 
-func _input(event):
+func _input(event) -> void:
 	if event.is_action_pressed("P2_HOLD"):
-		InputMap.action_erase_events("ToggleFullScreen")
-		print(InputMap.action_get_events("P2_HOLD"))
+		#InputMap.action_erase_events("ToggleFullScreen")
 		pass
+
+func GetKeybindKey(action: String) -> String:
+	print("Received action: " + action)
+	var inputEvents = InputMap.action_get_events(action)
+	var inputEvent = inputEvents[0]
+	var inputKeyCode = OS.get_keycode_string(inputEvent.physical_keycode)
+	#print(inputEvents)
+	#print(inputEvent)
+	#print(inputKeyCode)
+	print("Returning keybind: " + inputKeyCode)
+	return(inputKeyCode)

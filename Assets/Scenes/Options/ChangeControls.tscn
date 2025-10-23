@@ -1,11 +1,12 @@
-[gd_scene load_steps=19 format=3 uid="uid://cgvn5pc7hub41"]
+[gd_scene load_steps=20 format=3 uid="uid://cgvn5pc7hub41"]
 
 [ext_resource type="FontFile" uid="uid://c2r5tr7fax7rw" path="res://Assets/Fonts/KARNIVOL.ttf" id="1_1njrs"]
-[ext_resource type="Script" path="res://Assets/Scripts/Menus/ControlsManager.gd" id="1_kytr2"]
+[ext_resource type="Script" uid="uid://bsv0woos5synu" path="res://Assets/Scripts/Menus/ControlsManager.gd" id="1_kytr2"]
 [ext_resource type="FontFile" uid="uid://cnwbsfadh84a0" path="res://Assets/Fonts/KARNIVOR.ttf" id="2_3cijl"]
 [ext_resource type="FontFile" uid="uid://dqjgh4uqwylv5" path="res://Assets/Fonts/zrnic rg.otf" id="3_e5t27"]
 [ext_resource type="Texture2D" uid="uid://cs3saea5ku0gq" path="res://Assets/Sprites/UI/squareBlue.png" id="4_b2pmo"]
 [ext_resource type="FontFile" uid="uid://c0dik78i01yl8" path="res://Assets/Fonts/KARNIBLA.ttf" id="4_q4doj"]
+[ext_resource type="Script" uid="uid://6danckacwuye" path="res://Assets/Scripts/Menus/KeyBindsManager.gd" id="5_edd48"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gw2tc"]
 
@@ -87,6 +88,7 @@ theme_override_constants/margin_bottom = 30
 [node name="TabContainer" type="TabContainer" parent="PanelContainer/MarginContainer"]
 layout_mode = 2
 theme = SubResource("Theme_pajhr")
+theme_override_constants/tab_separation = 50
 tab_alignment = 1
 current_tab = 0
 clip_tabs = false
@@ -141,7 +143,8 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_e5t27")
 theme_override_font_sizes/font_size = 40
-text = "A"
+text = "TEST"
+script = ExtResource("5_edd48")
 
 [node name="MoveRight" type="HBoxContainer" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -418,6 +421,11 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Cancel"
 
+[node name="Control2" type="Control" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_vertical = 3
+
 [node name="Player 2" type="TabBar" parent="PanelContainer/MarginContainer/TabContainer"]
 visible = false
 layout_mode = 2
@@ -486,3 +494,13 @@ alignment = 1
 layout_mode = 2
 text = "MS"
 label_settings = SubResource("LabelSettings_at4u1")
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/MoveLeft/Button" to="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/MoveLeft/Button" method="UpdateKeybindDisplay"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/MoveLeft/Button" to="." method="RebindAction" binds= [0, 0]]
+[connection signal="pressed" from="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/MoveRight/Button" to="." method="RebindAction" binds= [0, 1]]
+[connection signal="pressed" from="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/SoftDrop/Button" to="." method="RebindAction" binds= [0, 2]]
+[connection signal="pressed" from="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/HardDrop/Button" to="." method="RebindAction" binds= [0, 3]]
+[connection signal="pressed" from="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/ClockWise/Button" to="." method="RebindAction" binds= [0, 4]]
+[connection signal="pressed" from="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/CounterClockWise/Button" to="." method="RebindAction" binds= [0, 5]]
+[connection signal="pressed" from="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/Rotate180/Button" to="." method="RebindAction" binds= [0, 6]]
+[connection signal="pressed" from="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/Hold/Button" to="." method="RebindAction" binds= [0, 7]]
