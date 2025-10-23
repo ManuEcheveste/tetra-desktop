@@ -143,7 +143,7 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_e5t27")
 theme_override_font_sizes/font_size = 40
-text = "TEST"
+text = "A"
 script = ExtResource("5_edd48")
 
 [node name="MoveRight" type="HBoxContainer" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer"]
