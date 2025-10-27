@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://ctnb8ngf7y6nu"]
 
-[ext_resource type="Script" path="res://Assets/Scripts/GameModes/40-Lines.gd" id="1_ebeyk"]
+[ext_resource type="Script" uid="uid://caehym5qi8c5s" path="res://Assets/Scripts/GameModes/40-Lines.gd" id="1_ebeyk"]
 [ext_resource type="PackedScene" uid="uid://cdmuarr6mdqy2" path="res://Prefabs/MainBoard.tscn" id="2_1gjt1"]
 [ext_resource type="AnimationLibrary" uid="uid://cadj7bbsvu750" path="res://Assets/Animations/Boards.res" id="3_4rk7c"]
 [ext_resource type="Texture2D" uid="uid://vvq3nfcryfj8" path="res://Assets/Sprites/BGNs/tetrio-coverart-alt.png" id="5_aupem"]
-[ext_resource type="PackedScene" uid="uid://bbaw65ob23fe8" path="res://Prefabs/End-Screens/40L-Results.tscn" id="6_nobwl"]
+[ext_resource type="PackedScene" uid="uid://bbaw65ob23fe8" path="res://Prefabs/KeyrebindManager.tscn" id="6_nobwl"]
 
 [sub_resource type="Animation" id="Animation_nu1ek"]
 length = 0.001

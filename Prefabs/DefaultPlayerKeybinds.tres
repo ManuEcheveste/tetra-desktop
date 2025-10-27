@@ -1,0 +1,98 @@
+[gd_resource type="Resource" script_class="PlayerConfig" load_steps=18 format=3 uid="uid://blq5ho585pam"]
+
+[ext_resource type="Script" uid="uid://nboj46t014x8" path="res://Assets/Scripts/PlayerConfig.gd" id="1_fvaem"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_i5ltc"]
+device = -1
+physical_keycode = 65
+unicode = 97
+
+[sub_resource type="InputEventKey" id="InputEventKey_2ihvx"]
+device = -1
+physical_keycode = 90
+unicode = 122
+
+[sub_resource type="InputEventKey" id="InputEventKey_orbfs"]
+device = -1
+physical_keycode = 88
+unicode = 120
+
+[sub_resource type="InputEventKey" id="InputEventKey_nnvm3"]
+device = -1
+physical_keycode = 32
+unicode = 32
+
+[sub_resource type="InputEventKey" id="InputEventKey_o7evk"]
+device = -1
+physical_keycode = 4194325
+
+[sub_resource type="InputEventKey" id="InputEventKey_vlum8"]
+device = -1
+physical_keycode = 4194319
+
+[sub_resource type="InputEventKey" id="InputEventKey_rdkcl"]
+device = -1
+physical_keycode = 4194321
+
+[sub_resource type="InputEventKey" id="InputEventKey_sl84e"]
+device = -1
+physical_keycode = 4194322
+
+[sub_resource type="InputEventKey" id="InputEventKey_s5rvs"]
+device = -1
+physical_keycode = 73
+unicode = 105
+
+[sub_resource type="InputEventKey" id="InputEventKey_diabx"]
+device = -1
+physical_keycode = 72
+unicode = 104
+
+[sub_resource type="InputEventKey" id="InputEventKey_6bfay"]
+device = -1
+physical_keycode = 85
+unicode = 117
+
+[sub_resource type="InputEventKey" id="InputEventKey_nxh3d"]
+device = -1
+physical_keycode = 87
+unicode = 119
+
+[sub_resource type="InputEventKey" id="InputEventKey_x63mm"]
+device = -1
+physical_keycode = 79
+unicode = 111
+
+[sub_resource type="InputEventKey" id="InputEventKey_k262r"]
+device = -1
+physical_keycode = 65
+unicode = 97
+
+[sub_resource type="InputEventKey" id="InputEventKey_mna6n"]
+device = -1
+physical_keycode = 70
+unicode = 102
+
+[sub_resource type="InputEventKey" id="InputEventKey_424dw"]
+device = -1
+physical_keycode = 83
+unicode = 115
+
+[resource]
+script = ExtResource("1_fvaem")
+Default_P1_MV_L = SubResource("InputEventKey_vlum8")
+Default_P1_MV_R = SubResource("InputEventKey_rdkcl")
+Default_P1_HD = SubResource("InputEventKey_nnvm3")
+Default_P1_SD = SubResource("InputEventKey_sl84e")
+Default_P1_CW = SubResource("InputEventKey_orbfs")
+Default_P1_CCW = SubResource("InputEventKey_2ihvx")
+Default_P1_180 = SubResource("InputEventKey_i5ltc")
+Default_P1_HOLD = SubResource("InputEventKey_o7evk")
+Default_P2_MV_L = SubResource("InputEventKey_k262r")
+Default_P2_MV_R = SubResource("InputEventKey_mna6n")
+Default_P2_HD = SubResource("InputEventKey_nxh3d")
+Default_P2_SD = SubResource("InputEventKey_424dw")
+Default_P2_CW = SubResource("InputEventKey_6bfay")
+Default_P2_CCW = SubResource("InputEventKey_diabx")
+Default_P2_180 = SubResource("InputEventKey_s5rvs")
+Default_P2_HOLD = SubResource("InputEventKey_x63mm")

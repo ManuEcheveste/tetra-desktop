@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cgvn5pc7hub41"]
+[gd_scene load_steps=24 format=3 uid="uid://cgvn5pc7hub41"]
 
 [ext_resource type="FontFile" uid="uid://c2r5tr7fax7rw" path="res://Assets/Fonts/KARNIVOL.ttf" id="1_1njrs"]
 [ext_resource type="Script" uid="uid://bsv0woos5synu" path="res://Assets/Scripts/Menus/ControlsManager.gd" id="1_kytr2"]
@@ -7,6 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://cs3saea5ku0gq" path="res://Assets/Sprites/UI/squareBlue.png" id="4_b2pmo"]
 [ext_resource type="FontFile" uid="uid://c0dik78i01yl8" path="res://Assets/Fonts/KARNIBLA.ttf" id="4_q4doj"]
 [ext_resource type="Script" uid="uid://6danckacwuye" path="res://Assets/Scripts/Menus/KeyBindsManager.gd" id="5_edd48"]
+[ext_resource type="Script" uid="uid://koeo6lxowxif" path="res://Assets/Scripts/Menus/HandlingManager.gd" id="7_6xopb"]
+[ext_resource type="PackedScene" uid="uid://bbaw65ob23fe8" path="res://Prefabs/KeyrebindManager.tscn" id="8_s4bqg"]
+[ext_resource type="Script" uid="uid://b3qqppghfqd7k" path="res://Assets/Scripts/Menus/RebindManager.gd" id="10_yccuy"]
+[ext_resource type="Theme" uid="uid://61le6g480owo" path="res://Themes/BigNumbers.tres" id="11_1fc0n"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gw2tc"]
 
@@ -51,8 +55,18 @@ HSlider/icons/grabber_highlight = ExtResource("4_b2pmo")
 HSlider/styles/grabber_area = SubResource("StyleBoxEmpty_qxwvg")
 HSlider/styles/grabber_area_highlight = SubResource("StyleBoxEmpty_o0w55")
 
-[sub_resource type="Theme" id="Theme_pidcq"]
-SpinBox/icons/updown = null
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0cy1d"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.422371, 0.422371, 0.422371, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="ChangeControls" type="Control"]
 layout_mode = 3
@@ -117,13 +131,27 @@ theme_override_constants/margin_right = 20
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer"]
+[node name="Control2" type="Control" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_vertical = 3
+
+[node name="ResetKeybinds" type="HBoxContainer" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/ResetKeybinds"]
+layout_mode = 2
+size_flags_horizontal = 6
 size_flags_vertical = 0
-text = "Controls
-"
+text = "Controls"
 label_settings = SubResource("LabelSettings_21ebs")
+
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/ResetKeybinds"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_q4doj")
+text = "RESET"
 
 [node name="MoveLeft" type="HBoxContainer" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -146,6 +174,18 @@ theme_override_font_sizes/font_size = 40
 text = "A"
 script = ExtResource("5_edd48")
 
+[node name="Warning" type="ColorRect" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/MoveLeft/Button"]
+visible = false
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 0, 0, 1)
+
 [node name="MoveRight" type="HBoxContainer" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
@@ -165,6 +205,20 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_e5t27")
 theme_override_font_sizes/font_size = 40
 text = "D"
+script = ExtResource("5_edd48")
+keybind = 1
+
+[node name="Warning" type="ColorRect" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/MoveRight/Button"]
+visible = false
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 0, 0, 1)
 
 [node name="SoftDrop" type="HBoxContainer" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -185,6 +239,20 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_e5t27")
 theme_override_font_sizes/font_size = 40
 text = "S"
+script = ExtResource("5_edd48")
+keybind = 2
+
+[node name="Warning" type="ColorRect" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/SoftDrop/Button"]
+visible = false
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 0, 0, 1)
 
 [node name="HardDrop" type="HBoxContainer" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -205,6 +273,20 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_e5t27")
 theme_override_font_sizes/font_size = 40
 text = "W"
+script = ExtResource("5_edd48")
+keybind = 3
+
+[node name="Warning" type="ColorRect" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/HardDrop/Button"]
+visible = false
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 0, 0, 1)
 
 [node name="ClockWise" type="HBoxContainer" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -225,6 +307,20 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_e5t27")
 theme_override_font_sizes/font_size = 40
 text = "U"
+script = ExtResource("5_edd48")
+keybind = 4
+
+[node name="Warning" type="ColorRect" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/ClockWise/Button"]
+visible = false
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 0, 0, 1)
 
 [node name="CounterClockWise" type="HBoxContainer" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -245,6 +341,20 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_e5t27")
 theme_override_font_sizes/font_size = 40
 text = "H"
+script = ExtResource("5_edd48")
+keybind = 5
+
+[node name="Warning" type="ColorRect" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/CounterClockWise/Button"]
+visible = false
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 0, 0, 1)
 
 [node name="Rotate180" type="HBoxContainer" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -265,6 +375,20 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_e5t27")
 theme_override_font_sizes/font_size = 40
 text = "I"
+script = ExtResource("5_edd48")
+keybind = 6
+
+[node name="Warning" type="ColorRect" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/Rotate180/Button"]
+visible = false
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 0, 0, 1)
 
 [node name="Hold" type="HBoxContainer" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -285,22 +409,33 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_e5t27")
 theme_override_font_sizes/font_size = 40
 text = "SPACE"
+script = ExtResource("5_edd48")
+keybind = 7
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer"]
+[node name="Warning" type="ColorRect" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/Hold/Button"]
+visible = false
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 0, 0, 1)
+
+[node name="HandlingTitle" type="HBoxContainer" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="Control" type="Control" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-
-[node name="Handling" type="Label" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="Handling" type="Label" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/HandlingTitle"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 0
 text = "Handling"
 label_settings = SubResource("LabelSettings_21ebs")
 
-[node name="Button" type="Button" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/HandlingTitle"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_q4doj")
 text = "RESET"
@@ -308,6 +443,7 @@ text = "RESET"
 [node name="ARR" type="HBoxContainer" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
+script = ExtResource("7_6xopb")
 
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/ARR"]
 layout_mode = 2
@@ -321,24 +457,27 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 theme = SubResource("Theme_lxpc3")
 max_value = 85.0
-editable = false
 scrollable = false
 
 [node name="Button" type="Button" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/ARR"]
-custom_minimum_size = Vector2(50, 0)
+custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_e5t27")
 theme_override_font_sizes/font_size = 40
 text = "0"
 
 [node name="MS Label" type="Label" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/ARR"]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 text = "MS"
 label_settings = SubResource("LabelSettings_at4u1")
+horizontal_alignment = 1
 
 [node name="DAS" type="HBoxContainer" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
+script = ExtResource("7_6xopb")
+action = 1
 
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/DAS"]
 layout_mode = 2
@@ -354,24 +493,27 @@ theme = SubResource("Theme_lxpc3")
 min_value = 15.0
 max_value = 333.0
 value = 142.0
-editable = false
 scrollable = false
 
 [node name="Button" type="Button" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/DAS"]
-custom_minimum_size = Vector2(50, 0)
+custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_e5t27")
 theme_override_font_sizes/font_size = 40
 text = "142"
 
 [node name="MS Label" type="Label" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/DAS"]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 text = "MS"
 label_settings = SubResource("LabelSettings_at4u1")
+horizontal_alignment = 1
 
 [node name="SDF" type="HBoxContainer" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
+script = ExtResource("7_6xopb")
+action = 2
 
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/SDF"]
 layout_mode = 2
@@ -384,22 +526,24 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 theme = SubResource("Theme_lxpc3")
+min_value = 1.0
 max_value = 41.0
 value = 41.0
-editable = false
 scrollable = false
 
 [node name="Button" type="Button" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/SDF"]
-custom_minimum_size = Vector2(50, 0)
+custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_e5t27")
 theme_override_font_sizes/font_size = 40
 text = "INF"
 
 [node name="MS Label" type="Label" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/SDF"]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-text = "MS"
+text = "X"
 label_settings = SubResource("LabelSettings_at4u1")
+horizontal_alignment = 1
 
 [node name="Control" type="Control" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -409,98 +553,110 @@ size_flags_vertical = 3
 layout_mode = 2
 alignment = 1
 
-[node name="AcceptButton" type="Button" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-text = "Accept"
+theme_override_fonts/font = ExtResource("4_q4doj")
+text = "BACK"
 
-[node name="CancelButton" type="Button" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-text = "Cancel"
-
-[node name="Control2" type="Control" parent="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Player 2" type="TabBar" parent="PanelContainer/MarginContainer/TabContainer"]
+[node name="RebindHandler" parent="." instance=ExtResource("8_s4bqg")]
 visible = false
-layout_mode = 2
-metadata/_tab_index = 1
+layout_mode = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/TabContainer/Player 2"]
+[node name="HandlingSet" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("10_yccuy")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/TabContainer/Player 2/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_right = 20
+[node name="BGN" type="ColorRect" parent="HandlingSet"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.501961)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/TabContainer/Player 2/ScrollContainer/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
+[node name="PanelContainer" type="PanelContainer" parent="HandlingSet"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -99.0
+offset_right = 250.0
+offset_bottom = 99.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0cy1d")
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/TabContainer/Player 2/ScrollContainer/MarginContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="HandlingSet/PanelContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-text = "Controls
-"
-label_settings = SubResource("LabelSettings_21ebs")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
-[node name="Handling" type="Label" parent="PanelContainer/MarginContainer/TabContainer/Player 2/ScrollContainer/MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HandlingSet/PanelContainer/MarginContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-text = "Handling"
-label_settings = SubResource("LabelSettings_21ebs")
-
-[node name="ARR" type="HBoxContainer" parent="PanelContainer/MarginContainer/TabContainer/Player 2/ScrollContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/TabContainer/Player 2/ScrollContainer/MarginContainer/VBoxContainer/ARR"]
-layout_mode = 2
-text = "ARR"
-label_settings = SubResource("LabelSettings_at4u1")
-
-[node name="HSlider" type="HSlider" parent="PanelContainer/MarginContainer/TabContainer/Player 2/ScrollContainer/MarginContainer/VBoxContainer/ARR"]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-theme = SubResource("Theme_lxpc3")
-max_value = 85.0
-value = 40.0
-scrollable = false
-
-[node name="SpinBox" type="SpinBox" parent="PanelContainer/MarginContainer/TabContainer/Player 2/ScrollContainer/MarginContainer/VBoxContainer/ARR"]
-layout_mode = 2
-theme = SubResource("Theme_pidcq")
-max_value = 85.0
 alignment = 1
 
-[node name="MS Label" type="Label" parent="PanelContainer/MarginContainer/TabContainer/Player 2/ScrollContainer/MarginContainer/VBoxContainer/ARR"]
+[node name="MainTime" type="Label" parent="HandlingSet/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "MS"
-label_settings = SubResource("LabelSettings_at4u1")
+theme = ExtResource("11_1fc0n")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "ARR"
 
-[connection signal="pressed" from="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/MoveLeft/Button" to="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/MoveLeft/Button" method="UpdateKeybindDisplay"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/MoveLeft/Button" to="." method="RebindAction" binds= [0, 0]]
-[connection signal="pressed" from="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/MoveRight/Button" to="." method="RebindAction" binds= [0, 1]]
-[connection signal="pressed" from="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/SoftDrop/Button" to="." method="RebindAction" binds= [0, 2]]
-[connection signal="pressed" from="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/HardDrop/Button" to="." method="RebindAction" binds= [0, 3]]
-[connection signal="pressed" from="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/ClockWise/Button" to="." method="RebindAction" binds= [0, 4]]
-[connection signal="pressed" from="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/CounterClockWise/Button" to="." method="RebindAction" binds= [0, 5]]
-[connection signal="pressed" from="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/Rotate180/Button" to="." method="RebindAction" binds= [0, 6]]
-[connection signal="pressed" from="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/Hold/Button" to="." method="RebindAction" binds= [0, 7]]
+[node name="MainTime2" type="Label" parent="HandlingSet/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("11_1fc0n")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+text = "Enter a new value"
+
+[node name="SpinBox" type="SpinBox" parent="HandlingSet/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+rounded = true
+
+[node name="RebindData" type="HBoxContainer" parent="HandlingSet/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Main Menu" type="Button" parent="HandlingSet/PanelContainer/MarginContainer/VBoxContainer/RebindData"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("4_q4doj")
+theme_override_font_sizes/font_size = 30
+text = "Cancel"
+
+[node name="Main Menu2" type="Button" parent="HandlingSet/PanelContainer/MarginContainer/VBoxContainer/RebindData"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("4_q4doj")
+theme_override_font_sizes/font_size = 30
+text = "Accept"
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/ResetKeybinds/Button" to="." method="ResetPlayerControls" binds= [1]]
+[connection signal="pressed" from="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/MoveLeft/Button" to="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/MoveLeft/Button" method="StartRebind"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/MoveRight/Button" to="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/MoveRight/Button" method="StartRebind"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/SoftDrop/Button" to="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/SoftDrop/Button" method="StartRebind"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/HardDrop/Button" to="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/HardDrop/Button" method="StartRebind"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/ClockWise/Button" to="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/ClockWise/Button" method="StartRebind"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/CounterClockWise/Button" to="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/CounterClockWise/Button" method="StartRebind"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/Rotate180/Button" to="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/Rotate180/Button" method="StartRebind"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/Hold/Button" to="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/Hold/Button" method="StartRebind"]
+[connection signal="drag_ended" from="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/ARR/HSlider" to="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/ARR" method="SaveNewValue"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/ARR/HSlider" to="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/ARR" method="UpdateDisplay"]
+[connection signal="drag_ended" from="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/DAS/HSlider" to="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/DAS" method="SaveNewValue"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/DAS/HSlider" to="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/DAS" method="UpdateDisplay"]
+[connection signal="drag_ended" from="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/SDF/HSlider" to="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/SDF" method="SaveNewValue"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/SDF/HSlider" to="PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/SDF" method="UpdateDisplay"]
+[connection signal="pressed" from="HandlingSet/PanelContainer/MarginContainer/VBoxContainer/RebindData/Main Menu" to="HandlingSet" method="GoToMain"]

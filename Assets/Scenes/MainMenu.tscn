@@ -276,3 +276,6 @@ vertical_alignment = 2
 [connection signal="pressed" from="PlayMenu/VBoxContainer/BackButton" to="." method="BackPlay"]
 [connection signal="pressed" from="OptionsMenu/VBoxContainer/ControlsButton" to="." method="ActivateControlsMenu"]
 [connection signal="pressed" from="OptionsMenu/VBoxContainer/BackButton" to="." method="BackOptions"]
+[connection signal="pressed" from="ChangeControls/PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/Button" to="." method="BackControls"]
+
+[editable path="ChangeControls"]

@@ -37,6 +37,10 @@ func BackPlay():
 func BackOptions():
 	mainMenu.visible = true
 	optionsMenu.visible = false
+	
+func BackControls():
+	optionsMenu.visible = true
+	controlsMenu.visible = false
 
 
 func GoToClassic():
