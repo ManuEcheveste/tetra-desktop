@@ -199,6 +199,18 @@ func SetDefaultKeybinds(player: int = 0):
 		InputMap.action_add_event("P2_HOLD", Default_P2_HOLD)
 		SaveNewSettings(2)
 
+func SetDefaultHandling(player: int):
+	if (player != 2):
+		Scripter.P1_ARR = 33
+		Scripter.P1_DAS = 167
+		Scripter.P1_SDF = 6
+		SaveNewSettings(1)
+	if (player != 1):
+		Scripter.P2_ARR = 33
+		Scripter.P2_DAS = 167
+		Scripter.P2_SDF = 6
+		SaveNewSettings(2)
+
 
 func LoadHandlingFromConfig(player: int = 0):
 	if player != 2:

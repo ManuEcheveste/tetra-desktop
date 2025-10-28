@@ -1,8 +1,11 @@
+class_name HandlingManager
 extends HBoxContainer
+
 @onready var slider: HSlider = $HSlider
 @onready var displayButton: Button = $Button
 @export var player: int = 0
 @export var action: int = 0 #0 = ARR, 1 = DAS, 2 = SDF
+@onready var handlingSetter: HandlingSetter = $"../../../../../../../../HandlingSet"
 
 func UpdateDisplay(newValue: float = 0):
 	if action == 2 && newValue == 41:
@@ -14,6 +17,7 @@ func UpdateSliderValue(newValue: float):
 	slider.value = newValue
 
 func _ready():
+	await get_tree().process_frame
 	if player == 0:
 		match action:
 			0:
@@ -51,3 +55,12 @@ func SaveNewValue(valueChanged: bool = false):
 				2:
 					Scripter.P2_SDF = int(slider.value)
 		PlayerConfig.new().SaveNewSettings()
+
+func AskForNewValue(title: String):
+	handlingSetter.visible = true
+	@warning_ignore("narrowing_conversion")
+	handlingSetter.GetNewHandling(title, slider.min_value, slider.max_value, slider.value, self)
+	
+func ReceiveNewValue(newValue: int):
+	UpdateSliderValue(newValue)
+	SaveNewValue()

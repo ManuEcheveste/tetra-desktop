@@ -56,7 +56,7 @@ theme_override_font_sizes/font_size = 200
 text = "Press any key to rebind"
 horizontal_alignment = 2
 
-[node name="Main Menu" type="Button" parent="."]
+[node name="Cancel" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -73,4 +73,4 @@ theme_override_fonts/font = ExtResource("4_3na4n")
 theme_override_font_sizes/font_size = 100
 text = "Main Menu"
 
-[connection signal="pressed" from="Main Menu" to="." method="GoToMain"]
+[connection signal="pressed" from="Cancel" to="." method="CancelRebind"]
