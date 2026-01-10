@@ -247,7 +247,7 @@ offset_right = 307.0
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("6_kb5ii")
 theme_override_font_sizes/font_size = 30
-text = "v0.0.3"
+text = "v0.0.4"
 vertical_alignment = 2
 
 [node name="Disclaimer" type="Label" parent="."]
@@ -277,5 +277,6 @@ vertical_alignment = 2
 [connection signal="pressed" from="OptionsMenu/VBoxContainer/ControlsButton" to="." method="ActivateControlsMenu"]
 [connection signal="pressed" from="OptionsMenu/VBoxContainer/BackButton" to="." method="BackOptions"]
 [connection signal="pressed" from="ChangeControls/PanelContainer/MarginContainer/TabContainer/Player 1/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/Button" to="." method="BackControls"]
+[connection signal="pressed" from="ChangeControls/PanelContainer/MarginContainer/TabContainer/Player 2/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/Button" to="." method="BackControls"]
 
 [editable path="ChangeControls"]

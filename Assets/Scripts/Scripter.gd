@@ -23,6 +23,8 @@ func _ready():
 	instance = self
 	PlayerConfig.new().LoadKeyBindsFromConfig()
 	PlayerConfig.new().LoadHandlingFromConfig()
+	if not DirAccess.dir_exists_absolute("user://skins"):
+		DirAccess.make_dir_absolute("user://skins")
 	#var config = PlayerConfig.new()
 	#config.SetDefaultSettings()
 

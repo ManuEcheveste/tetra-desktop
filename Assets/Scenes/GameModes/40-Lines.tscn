@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cdmuarr6mdqy2" path="res://Prefabs/MainBoard.tscn" id="2_1gjt1"]
 [ext_resource type="AnimationLibrary" uid="uid://cadj7bbsvu750" path="res://Assets/Animations/Boards.res" id="3_4rk7c"]
 [ext_resource type="Texture2D" uid="uid://vvq3nfcryfj8" path="res://Assets/Sprites/BGNs/tetrio-coverart-alt.png" id="5_aupem"]
-[ext_resource type="PackedScene" uid="uid://bbaw65ob23fe8" path="res://Prefabs/KeyrebindManager.tscn" id="6_nobwl"]
+[ext_resource type="PackedScene" uid="uid://dvnm1l8sjj4m7" path="res://Prefabs/End-Screens/40L-Results.tscn" id="5_okq1a"]
 
 [sub_resource type="Animation" id="Animation_nu1ek"]
 length = 0.001
@@ -71,7 +71,7 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yrgys"]
 _data = {
-"RESET": SubResource("Animation_nu1ek")
+&"RESET": SubResource("Animation_nu1ek")
 }
 
 [node name="MainGame" type="Control"]
@@ -113,8 +113,8 @@ visible = true
 
 [node name="Animator" type="AnimationPlayer" parent="Boards/Player1"]
 libraries = {
-"": SubResource("AnimationLibrary_yrgys"),
-"Boards": ExtResource("3_4rk7c")
+&"": SubResource("AnimationLibrary_yrgys"),
+&"Boards": ExtResource("3_4rk7c")
 }
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -129,16 +129,13 @@ texture = ExtResource("5_aupem")
 expand_mode = 2
 stretch_mode = 6
 
-[node name="EndResults" parent="." instance=ExtResource("6_nobwl")]
+[node name="EndResults" parent="." instance=ExtResource("5_okq1a")]
 visible = false
 layout_mode = 1
 
 [connection signal="WonGame" from="." to="Boards/Player1/Board" method="StopGame"]
-[connection signal="WonGame" from="." to="EndResults" method="GetResults"]
 [connection signal="Lines" from="Boards/Player1/Board" to="." method="VerifyLines"]
 [connection signal="TopedOut" from="Boards/Player1/Board" to="." method="LostTheGame"]
-[connection signal="time" from="Boards/Player1/Board/DisplayInfo" to="EndResults" method="UpdateResults"]
 [connection signal="animation_finished" from="Boards/Player1/Animator" to="." method="_on_animator_animation_finished"]
-[connection signal="AskForTime" from="EndResults" to="Boards/Player1/Board/DisplayInfo" method="SendTime"]
 
 [editable path="Boards/Player1/Board"]

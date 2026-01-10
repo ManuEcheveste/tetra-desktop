@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://nboj46t014x8" path="res://Assets/Scripts/PlayerConfig.gd" id="1_fvaem"]
 
-[sub_resource type="InputEventKey" id="InputEventKey_i5ltc"]
+[sub_resource type="InputEventKey" id="InputEventKey_mna6n"]
 device = -1
-physical_keycode = 65
-unicode = 97
+physical_keycode = 96
+unicode = 60
 
 [sub_resource type="InputEventKey" id="InputEventKey_2ihvx"]
 device = -1
@@ -68,10 +68,10 @@ device = -1
 physical_keycode = 65
 unicode = 97
 
-[sub_resource type="InputEventKey" id="InputEventKey_mna6n"]
+[sub_resource type="InputEventKey" id="InputEventKey_fvaem"]
 device = -1
-physical_keycode = 70
-unicode = 102
+physical_keycode = 68
+unicode = 100
 
 [sub_resource type="InputEventKey" id="InputEventKey_424dw"]
 device = -1
@@ -86,10 +86,10 @@ Default_P1_HD = SubResource("InputEventKey_nnvm3")
 Default_P1_SD = SubResource("InputEventKey_sl84e")
 Default_P1_CW = SubResource("InputEventKey_orbfs")
 Default_P1_CCW = SubResource("InputEventKey_2ihvx")
-Default_P1_180 = SubResource("InputEventKey_i5ltc")
+Default_P1_180 = SubResource("InputEventKey_mna6n")
 Default_P1_HOLD = SubResource("InputEventKey_o7evk")
 Default_P2_MV_L = SubResource("InputEventKey_k262r")
-Default_P2_MV_R = SubResource("InputEventKey_mna6n")
+Default_P2_MV_R = SubResource("InputEventKey_fvaem")
 Default_P2_HD = SubResource("InputEventKey_nxh3d")
 Default_P2_SD = SubResource("InputEventKey_424dw")
 Default_P2_CW = SubResource("InputEventKey_6bfay")

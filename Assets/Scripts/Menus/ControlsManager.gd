@@ -64,7 +64,7 @@ func ResetHandling(player: int = 0):
 		
 func CheckForDuplicates():
 	var key_map = {}
-	var buttons = [p1MLButton, p1MRButton, p1SDButton, p1HDButton, p1CWButton, p1CCWButton, p1_180Button, p1HoldButton]
+	var buttons = [p1MLButton, p1MRButton, p1SDButton, p1HDButton, p1CWButton, p1CCWButton, p1_180Button, p1HoldButton, p2MLButton, p2MRButton, p2SDButton, p2HDButton, p2CWButton, p2CCWButton, p2_180Button, p2HoldButton]
 	
 	for button in buttons:
 		if is_instance_valid(button):

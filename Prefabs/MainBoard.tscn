@@ -2,10 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://dueuwyx80a3sb" path="res://Assets/Sprites/S Q U A R E.png" id="1_210rk"]
 [ext_resource type="TileSet" uid="uid://d0e0onwni5qdf" path="res://Themes/Tetraminos.tres" id="2_lbd4t"]
-[ext_resource type="Script" path="res://Assets/Scripts/BoardManager.gd" id="3_l46in"]
-[ext_resource type="Script" path="res://Assets/Scripts/HoldManager.gd" id="4_j8n4r"]
-[ext_resource type="Script" path="res://Assets/Scripts/QueueManager.gd" id="5_d1nef"]
-[ext_resource type="Script" path="res://Assets/Scripts/DisplayInfoManager.gd" id="6_7tbkf"]
+[ext_resource type="Script" uid="uid://de8d2gg8r3rrp" path="res://Assets/Scripts/BoardManager.gd" id="3_l46in"]
+[ext_resource type="Script" uid="uid://dvs85s48qic1o" path="res://Assets/Scripts/HoldManager.gd" id="4_j8n4r"]
+[ext_resource type="Script" uid="uid://df3w7ahn0be3k" path="res://Assets/Scripts/QueueManager.gd" id="5_d1nef"]
+[ext_resource type="Script" uid="uid://bbyu61ssa5ee5" path="res://Assets/Scripts/DisplayInfoManager.gd" id="6_7tbkf"]
 [ext_resource type="Theme" uid="uid://c8etue40f6gr1" path="res://Themes/SmallNumbers.tres" id="7_4mvja"]
 [ext_resource type="Theme" uid="uid://61le6g480owo" path="res://Themes/BigNumbers.tres" id="8_mlglv"]
 [ext_resource type="FontFile" uid="uid://cnwbsfadh84a0" path="res://Assets/Fonts/KARNIVOR.ttf" id="9_ctqq6"]
@@ -66,8 +66,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yvi3v"]
 _data = {
-"FadeOut": SubResource("Animation_eucf3"),
-"RESET": SubResource("Animation_empu2")
+&"FadeOut": SubResource("Animation_eucf3"),
+&"RESET": SubResource("Animation_empu2")
 }
 
 [sub_resource type="LabelSettings" id="LabelSettings_j5sse"]
@@ -1261,7 +1261,7 @@ horizontal_alignment = 2
 
 [node name="Animator" type="AnimationPlayer" parent="DisplayInfo/Leyends/TSpin"]
 libraries = {
-"": SubResource("AnimationLibrary_yvi3v")
+&"": SubResource("AnimationLibrary_yvi3v")
 }
 
 [node name="LineClear" type="Label" parent="DisplayInfo/Leyends"]
@@ -1273,7 +1273,7 @@ horizontal_alignment = 2
 
 [node name="Animator" type="AnimationPlayer" parent="DisplayInfo/Leyends/LineClear"]
 libraries = {
-"": SubResource("AnimationLibrary_yvi3v")
+&"": SubResource("AnimationLibrary_yvi3v")
 }
 
 [node name="B2BCombo" type="Label" parent="DisplayInfo/Leyends"]
@@ -1303,7 +1303,7 @@ horizontal_alignment = 2
 
 [node name="Animator" type="AnimationPlayer" parent="DisplayInfo/Leyends/B2BCombo"]
 libraries = {
-"": SubResource("AnimationLibrary_yvi3v")
+&"": SubResource("AnimationLibrary_yvi3v")
 }
 
 [node name="Combo" type="Label" parent="DisplayInfo/Leyends"]
@@ -1332,7 +1332,7 @@ horizontal_alignment = 2
 
 [node name="Animator" type="AnimationPlayer" parent="DisplayInfo/Leyends/Combo"]
 libraries = {
-"": SubResource("AnimationLibrary_yvi3v")
+&"": SubResource("AnimationLibrary_yvi3v")
 }
 
 [connection signal="Attack" from="." to="DisplayInfo" method="Attack"]
